@@ -29,6 +29,9 @@
 		2746CDCA1A702F7800719B66 /* MockingjayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MockingjayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2746CDD01A702F7800719B66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2746CDD11A702F7800719B66 /* MockingjayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockingjayTests.swift; sourceTree = "<group>"; };
+		2746CDDC1A702FC100719B66 /* UniversalFramework_Base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = UniversalFramework_Base.xcconfig; sourceTree = "<group>"; };
+		2746CDDD1A702FC100719B66 /* UniversalFramework_Framework.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = UniversalFramework_Framework.xcconfig; sourceTree = "<group>"; };
+		2746CDDE1A702FC100719B66 /* UniversalFramework_Test.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = UniversalFramework_Test.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +56,7 @@
 		2746CDB51A702F7800719B66 = {
 			isa = PBXGroup;
 			children = (
+				2746CDDB1A702FC100719B66 /* Configurations */,
 				2746CDC11A702F7800719B66 /* Mockingjay */,
 				2746CDCE1A702F7800719B66 /* MockingjayTests */,
 				2746CDC01A702F7800719B66 /* Products */,
@@ -100,6 +104,16 @@
 				2746CDD01A702F7800719B66 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2746CDDB1A702FC100719B66 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				2746CDDC1A702FC100719B66 /* UniversalFramework_Base.xcconfig */,
+				2746CDDD1A702FC100719B66 /* UniversalFramework_Framework.xcconfig */,
+				2746CDDE1A702FC100719B66 /* UniversalFramework_Test.xcconfig */,
+			);
+			path = Configurations;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -314,6 +328,7 @@
 		};
 		2746CDD61A702F7800719B66 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2746CDDD1A702FC100719B66 /* UniversalFramework_Framework.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -323,7 +338,6 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = Mockingjay/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -331,6 +345,7 @@
 		};
 		2746CDD71A702F7800719B66 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2746CDDD1A702FC100719B66 /* UniversalFramework_Framework.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
@@ -340,7 +355,6 @@
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = Mockingjay/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -348,32 +362,24 @@
 		};
 		2746CDD91A702F7800719B66 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2746CDDE1A702FC100719B66 /* UniversalFramework_Test.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = MockingjayTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		2746CDDA1A702F7800719B66 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2746CDDE1A702FC100719B66 /* UniversalFramework_Test.xcconfig */;
 			buildSettings = {
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
 				INFOPLIST_FILE = MockingjayTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -397,6 +403,7 @@
 				2746CDD71A702F7800719B66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2746CDD81A702F7800719B66 /* Build configuration list for PBXNativeTarget "MockingjayTests" */ = {
 			isa = XCConfigurationList;
@@ -405,6 +412,7 @@
 				2746CDDA1A702F7800719B66 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

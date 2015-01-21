@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Cocode. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for Mockingjay.
 FOUNDATION_EXPORT double MockingjayVersionNumber;
