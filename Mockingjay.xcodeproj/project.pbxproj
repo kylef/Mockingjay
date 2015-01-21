@@ -61,7 +61,9 @@
 				2746CDCE1A702F7800719B66 /* MockingjayTests */,
 				2746CDC01A702F7800719B66 /* Products */,
 			);
+			indentWidth = 2;
 			sourceTree = "<group>";
+			tabWidth = 2;
 		};
 		2746CDC01A702F7800719B66 /* Products */ = {
 			isa = PBXGroup;
