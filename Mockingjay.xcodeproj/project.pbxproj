@@ -10,6 +10,8 @@
 		274367921AA27A7C0030C97B /* Mockingjay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367911AA27A7C0030C97B /* Mockingjay.swift */; };
 		274367941AA27AAD0030C97B /* MockingjayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367931AA27AAD0030C97B /* MockingjayProtocol.swift */; };
 		274367961AA27B170030C97B /* MockingjayProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367951AA27B170030C97B /* MockingjayProtocolTests.swift */; };
+		274367981AA28AFC0030C97B /* Matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367971AA28AFC0030C97B /* Matchers.swift */; };
+		2743679A1AA28B0D0030C97B /* MatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367991AA28B0D0030C97B /* MatcherTests.swift */; };
 		2746CDC51A702F7800719B66 /* Mockingjay.h in Headers */ = {isa = PBXBuildFile; fileRef = 2746CDC41A702F7800719B66 /* Mockingjay.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2746CDCB1A702F7800719B66 /* Mockingjay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2746CDBF1A702F7800719B66 /* Mockingjay.framework */; };
 		2746CDD21A702F7800719B66 /* MockingjayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2746CDD11A702F7800719B66 /* MockingjayTests.swift */; };
@@ -29,6 +31,8 @@
 		274367911AA27A7C0030C97B /* Mockingjay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mockingjay.swift; sourceTree = "<group>"; };
 		274367931AA27AAD0030C97B /* MockingjayProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockingjayProtocol.swift; sourceTree = "<group>"; };
 		274367951AA27B170030C97B /* MockingjayProtocolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockingjayProtocolTests.swift; sourceTree = "<group>"; };
+		274367971AA28AFC0030C97B /* Matchers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matchers.swift; sourceTree = "<group>"; };
+		274367991AA28B0D0030C97B /* MatcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatcherTests.swift; sourceTree = "<group>"; };
 		2746CDBF1A702F7800719B66 /* Mockingjay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mockingjay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2746CDC31A702F7800719B66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2746CDC41A702F7800719B66 /* Mockingjay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mockingjay.h; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 			children = (
 				2746CDC41A702F7800719B66 /* Mockingjay.h */,
 				274367911AA27A7C0030C97B /* Mockingjay.swift */,
+				274367971AA28AFC0030C97B /* Matchers.swift */,
 				274367931AA27AAD0030C97B /* MockingjayProtocol.swift */,
 				2746CDC21A702F7800719B66 /* Supporting Files */,
 			);
@@ -104,6 +109,7 @@
 			children = (
 				2746CDD11A702F7800719B66 /* MockingjayTests.swift */,
 				274367951AA27B170030C97B /* MockingjayProtocolTests.swift */,
+				274367991AA28B0D0030C97B /* MatcherTests.swift */,
 				2746CDCF1A702F7800719B66 /* Supporting Files */,
 			);
 			path = MockingjayTests;
@@ -234,6 +240,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				274367981AA28AFC0030C97B /* Matchers.swift in Sources */,
 				274367921AA27A7C0030C97B /* Mockingjay.swift in Sources */,
 				274367941AA27AAD0030C97B /* MockingjayProtocol.swift in Sources */,
 			);
@@ -243,6 +250,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2743679A1AA28B0D0030C97B /* MatcherTests.swift in Sources */,
 				274367961AA27B170030C97B /* MockingjayProtocolTests.swift in Sources */,
 				2746CDD21A702F7800719B66 /* MockingjayTests.swift in Sources */,
 			);
