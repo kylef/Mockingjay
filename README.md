@@ -54,6 +54,10 @@ stub(everything, http(404))
 
 The `stub` method in Mockingly takes two functions or closures, one to match the request and another to build the response. This allows you to easily extend the syntax to provide your own specific functions.
 
+```swift
+stub(matcher, builder)
+```
+
 ### Matchers
 
 A matcher is simply a function that takes a request and returns a boolean value for if the stub matches the request.
