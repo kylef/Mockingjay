@@ -52,7 +52,7 @@ stub(everything, http(404))
 
 ## Stub
 
-The `stub` method in Mockingly takes two functions or closures, one to match the request and another to build the response. This allows you to easily extend the syntax to provide your own specific functions.
+The `stub` method in Mockingjay takes two functions or closures, one to match the request and another to build the response. This allows you to easily extend the syntax to provide your own specific functions.
 
 ```swift
 stub(matcher, builder)
