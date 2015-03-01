@@ -13,7 +13,6 @@
 		274367981AA28AFC0030C97B /* Matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367971AA28AFC0030C97B /* Matchers.swift */; };
 		2743679A1AA28B0D0030C97B /* MatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367991AA28B0D0030C97B /* MatcherTests.swift */; };
 		2743679D1AA28E0B0030C97B /* XCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2743679B1AA28D4D0030C97B /* XCTest.swift */; };
-		274367A21AA292B70030C97B /* XCTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 2743679F1AA2926D0030C97B /* XCTest.m */; };
 		274367AE1AA29AED0030C97B /* URITemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274367A91AA29ADA0030C97B /* URITemplate.framework */; };
 		274367B01AA29E510030C97B /* Builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367AF1AA29E510030C97B /* Builders.swift */; };
 		274367B21AA29E620030C97B /* BuildersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367B11AA29E620030C97B /* BuildersTests.swift */; };
@@ -60,7 +59,6 @@
 		274367971AA28AFC0030C97B /* Matchers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matchers.swift; sourceTree = "<group>"; };
 		274367991AA28B0D0030C97B /* MatcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatcherTests.swift; sourceTree = "<group>"; };
 		2743679B1AA28D4D0030C97B /* XCTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTest.swift; sourceTree = "<group>"; };
-		2743679F1AA2926D0030C97B /* XCTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCTest.m; sourceTree = "<group>"; };
 		274367A31AA29ADA0030C97B /* URITemplate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = URITemplate.xcodeproj; path = URITemplate/URITemplate.xcodeproj; sourceTree = "<group>"; };
 		274367AF1AA29E510030C97B /* Builders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Builders.swift; sourceTree = "<group>"; };
 		274367B11AA29E620030C97B /* BuildersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildersTests.swift; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 				274367AF1AA29E510030C97B /* Builders.swift */,
 				274367931AA27AAD0030C97B /* MockingjayProtocol.swift */,
 				2743679B1AA28D4D0030C97B /* XCTest.swift */,
-				2743679F1AA2926D0030C97B /* XCTest.m */,
 				2746CDC21A702F7800719B66 /* Supporting Files */,
 			);
 			path = Mockingjay;
@@ -326,7 +323,6 @@
 				2743679D1AA28E0B0030C97B /* XCTest.swift in Sources */,
 				274367B21AA29E620030C97B /* BuildersTests.swift in Sources */,
 				2746CDD21A702F7800719B66 /* MockingjayTests.swift in Sources */,
-				274367A21AA292B70030C97B /* XCTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
