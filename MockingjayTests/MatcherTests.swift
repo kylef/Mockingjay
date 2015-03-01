@@ -49,3 +49,19 @@ class URIMatcherTests : XCTestCase {
     XCTAssertTrue(uri("/{username}/URITemplate")(request:request))
   }
 }
+
+class HTTPMatcherTests : XCTestCase {
+  func testMethodURIMatch() {
+    let request = NSMutableURLRequest(URL: NSURL(string: "https://api.palaverapp.com/")!)
+    request.HTTPMethod = "PATCH"
+
+    XCTAssertTrue(http(.PATCH, "https://api.palaverapp.com/")(request:request))
+  }
+
+  func testMethodMismatch() {
+    let request = NSMutableURLRequest(URL: NSURL(string: "https://api.palaverapp.com/")!)
+    request.HTTPMethod = "GET"
+
+    XCTAssertFalse(http(.PATCH, "https://api.palaverapp.com/")(request:request))
+  }
+}
