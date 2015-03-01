@@ -13,15 +13,15 @@ import Mockingjay
 extension XCTest {
   // MARK: Stubbing
 
-  func stub(matcher:Matcher, builder:Builder) -> Stub {
+  public func stub(matcher:Matcher, builder:Builder) -> Stub {
     return MockingjayProtocol.addStub(matcher, builder: builder)
   }
 
-  func removeStub(stub:Stub) {
+  public func removeStub(stub:Stub) {
     MockingjayProtocol.removeStub(stub)
   }
 
-  func removeAllStubs() {
+  public func removeAllStubs() {
     MockingjayProtocol.removeAllStubs()
   }
 
