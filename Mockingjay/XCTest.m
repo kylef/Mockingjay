@@ -1,5 +1,5 @@
 //
-//  XCTest+XCTest.m
+//  XCTest.m
 //  Mockingjay
 //
 //  Created by Kyle Fuller on 01/03/2015.
@@ -8,7 +8,7 @@
 
 #import <objc/runtime.h>
 #import <XCTest/XCTest.h>
-#import <Mockingjay/Mockingjay.h>
+#import <Mockingjay/Mockingjay-Swift.h>
 
 // TODO Figure out how to do this in Swift.
 // Boris, you like a challenge? ;)
