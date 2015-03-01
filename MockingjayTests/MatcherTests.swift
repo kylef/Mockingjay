@@ -34,8 +34,18 @@ class URIMatcherTests : XCTestCase {
     XCTAssertFalse(uri("https://api.palaverapp.com/notifications")(request:request))
   }
 
-  func testExactFullPathMismatche() {
+  func testExactFullPathMismatch() {
     let request = NSURLRequest(URL: NSURL(string: "https://api.palaverapp.com/devices")!)
     XCTAssertFalse(uri("/notifications")(request:request))
+  }
+
+  func testVariableFullURIMatch() {
+    let request = NSURLRequest(URL: NSURL(string: "https://github.com/kylef/URITemplate")!)
+    XCTAssertTrue(uri("https://github.com/{username}/URITemplate")(request:request))
+  }
+
+  func testVariablePathMatch() {
+    let request = NSURLRequest(URL: NSURL(string: "https://github.com/kylef/URITemplate")!)
+    XCTAssertTrue(uri("/{username}/URITemplate")(request:request))
   }
 }

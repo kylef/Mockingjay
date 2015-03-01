@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import URITemplate
 
 // Collection of generic matchers
 
@@ -17,14 +18,16 @@ public func everything(request:NSURLRequest) -> Bool {
 
 /// Mockingjay matcher which matches URIs
 public func uri(uri:String)(request:NSURLRequest) -> Bool {
+  let template = URITemplate(template:uri)
+
   if let URLString = request.URL.absoluteString {
-    if URLString == uri {
+    if template.extract(URLString) != nil {
       return true
     }
   }
 
   if let path = request.URL.path {
-    if path == uri {
+    if template.extract(path) != nil {
       return true
     }
   }
