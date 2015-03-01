@@ -60,7 +60,7 @@ class MockingjayProtocolTests : XCTestCase {
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
       }) { (request) -> (Response) in
-        return Response.Success(response: stubResponse, data: stubData)
+        return Response.Success(stubResponse, stubData)
     }
 
     var response:NSURLResponse?
