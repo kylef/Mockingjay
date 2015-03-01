@@ -17,6 +17,7 @@
 		274367AE1AA29AED0030C97B /* URITemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274367A91AA29ADA0030C97B /* URITemplate.framework */; };
 		274367B01AA29E510030C97B /* Builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367AF1AA29E510030C97B /* Builders.swift */; };
 		274367B21AA29E620030C97B /* BuildersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367B11AA29E620030C97B /* BuildersTests.swift */; };
+		274367C11AA3550B0030C97B /* NSURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 274367C01AA3550B0030C97B /* NSURLSessionConfiguration.m */; };
 		2746CDC51A702F7800719B66 /* Mockingjay.h in Headers */ = {isa = PBXBuildFile; fileRef = 2746CDC41A702F7800719B66 /* Mockingjay.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2746CDCB1A702F7800719B66 /* Mockingjay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2746CDBF1A702F7800719B66 /* Mockingjay.framework */; };
 		2746CDD21A702F7800719B66 /* MockingjayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2746CDD11A702F7800719B66 /* MockingjayTests.swift */; };
@@ -64,6 +65,7 @@
 		274367A31AA29ADA0030C97B /* URITemplate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = URITemplate.xcodeproj; path = URITemplate/URITemplate.xcodeproj; sourceTree = "<group>"; };
 		274367AF1AA29E510030C97B /* Builders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Builders.swift; sourceTree = "<group>"; };
 		274367B11AA29E620030C97B /* BuildersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildersTests.swift; sourceTree = "<group>"; };
+		274367C01AA3550B0030C97B /* NSURLSessionConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSURLSessionConfiguration.m; sourceTree = "<group>"; };
 		2746CDBF1A702F7800719B66 /* Mockingjay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Mockingjay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2746CDC31A702F7800719B66 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2746CDC41A702F7800719B66 /* Mockingjay.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Mockingjay.h; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 				274367931AA27AAD0030C97B /* MockingjayProtocol.swift */,
 				2743679B1AA28D4D0030C97B /* XCTest.swift */,
 				2743679F1AA2926D0030C97B /* XCTest.m */,
+				274367C01AA3550B0030C97B /* NSURLSessionConfiguration.m */,
 				2746CDC21A702F7800719B66 /* Supporting Files */,
 			);
 			path = Mockingjay;
@@ -313,6 +316,7 @@
 				274367981AA28AFC0030C97B /* Matchers.swift in Sources */,
 				274367921AA27A7C0030C97B /* Mockingjay.swift in Sources */,
 				274367941AA27AAD0030C97B /* MockingjayProtocol.swift in Sources */,
+				274367C11AA3550B0030C97B /* NSURLSessionConfiguration.m in Sources */,
 				274367B01AA29E510030C97B /* Builders.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
