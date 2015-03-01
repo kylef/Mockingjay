@@ -12,10 +12,6 @@ import Mockingjay
 
 
 class MockingjayProtocolTests : XCTestCase {
-  override func tearDown() {
-    MockingjayProtocol.removeAllStubs()
-  }
-
   func testCannotInitWithUnknownRequest() {
     let request = NSURLRequest(URL: NSURL(string: "https://kylefuller.co.uk/")!)
     let canInitWithRequest = MockingjayProtocol.canInitWithRequest(request)
