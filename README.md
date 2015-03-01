@@ -1,6 +1,6 @@
 # Mockingjay
 
-[![Build Status](http://img.shields.io/travis/kylef/Mockingjay.swift/master.svg?style=flat)](https://travis-ci.org/kylef/Mockingjay.swift)
+[![Build Status](http://img.shields.io/travis/kylef/Mockingjay/master.svg?style=flat)](https://travis-ci.org/kylef/Mockingjay)
 
 An elegant library for stubbing HTTP requests in Swift, allowing you to stub any HTTP/HTTPS using `NSURLConnection` or `NSURLSession`. That includes any request made from libraries such as [Alamofire](https://github.com/Alamofire/Alamofire) and [AFNetworking](https://github.com/AFNetworking/AFNetworking).
 
