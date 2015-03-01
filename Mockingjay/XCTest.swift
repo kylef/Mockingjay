@@ -24,4 +24,19 @@ extension XCTest {
   func removeAllStubs() {
     MockingjayProtocol.removeAllStubs()
   }
+
+  // MARK: Teardown
+
+  override public class func initialize() {
+    if (self === XCTest.self) {
+      let tearDown = class_getInstanceMethod(self, "tearDown")
+      let mockingjayTearDown = class_getInstanceMethod(self, "mockingjayTearDown")
+      method_exchangeImplementations(tearDown, mockingjayTearDown)
+    }
+  }
+
+  func mockingjayTearDown() {
+    mockingjayTearDown()
+    MockingjayProtocol.removeAllStubs()
+  }
 }
