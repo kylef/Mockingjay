@@ -21,7 +21,7 @@ Pod::Spec.new do |spec|
 
   spec.subspec 'XCTest' do |xctest_spec|
     xctest_spec.dependency 'Mockingjay/Core'
-    xctest_spec.source_files = 'Mockingjay/XCTest.{swift,m}'
+    xctest_spec.source_files = 'Mockingjay/XCTest.swift'
     xctest_spec.frameworks = 'XCTest'
   end
 end
