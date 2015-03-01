@@ -2,6 +2,8 @@
 
 [![Build Status](http://img.shields.io/travis/kylef/Mockingjay.swift/master.svg?style=flat)](https://travis-ci.org/kylef/Mockingjay.swift)
 
+An elegant library for stubbing HTTP requests in Swift, allowing you to stub any HTTP/HTTPS using `NSURLConnection` or `NSURLSession`. That includes any request made from libraries such as [Alamofire](https://github.com/Alamofire/Alamofire) and [AFNetworking](https://github.com/AFNetworking/AFNetworking).
+
 ## Installation
 
 ```ruby
@@ -18,6 +20,13 @@ Mockingly has full integration to XCTest and you simply just need to register a 
 let body = [ "user": "Kyle" ]
 stub(uri("/{user}/{repository}"), json(body))
 ```
+
+The `uri` function takes a URL or path which can have a [URI Template](https://github.com/kylef/URITemplate.swift). Such as the following:
+
+- `https://github.com/kylef/WebLinking.swift`
+- `https://github.com/kylef/{repository}`
+- `/kylef/{repository}`
+- `/kylef/URITemplate.swift`
 
 #### Stubbing a specific HTTP method with a JSON structure
 
@@ -38,6 +47,8 @@ stub(everything, failure(error))
 ```swift
 stub(everything, http(404))
 ```
+
+*Note, the `http` builder can take a set of headers and a body too.*
 
 ## Stub
 
@@ -60,11 +71,13 @@ stub(matcher, failure(error))
 Builders are very similar to a matcher, it takes a request, and it returns either a success or failure response.
 
 ```swift
-fun builder(request:NSURLRequest) -> Response {
+func builder(request:NSURLRequest) -> Response {
   let response = NSHTTPURLResponse(URL: request.URL, statusCode: 200, HTTPVersion: nil, headerFields: nil)!
   let data:NSData? = nil
   return .Success(response, data)
 }
+
+stub(matcher, builder)
 ```
 
 ## License
