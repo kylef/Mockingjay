@@ -14,15 +14,15 @@ func toString(item:AnyObject) -> String {
   return "\(item)"
 }
 
-class MockingjayTests: XCTestCase {
+class MockingjaySessionTests: XCTestCase {
   func testEphemeralSessionConfigurationIncludesProtocol() {
-    let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+    let configuration = NSURLSessionConfiguration.ephemeralSessionConfiguration()
     let protocolClasses = map(configuration.protocolClasses!, toString)
     XCTAssertEqual(protocolClasses.first!, "Mockingjay.MockingjayProtocol")
   }
 
   func testDefaultSessionConfigurationIncludesProtocol() {
-    let configuration = NSURLSessionConfiguration.ephemeralSessionConfiguration()
+    let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
     let protocolClasses = map(configuration.protocolClasses!, toString)
     XCTAssertEqual(protocolClasses.first!, "Mockingjay.MockingjayProtocol")
   }

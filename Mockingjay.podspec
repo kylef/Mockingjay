@@ -15,8 +15,12 @@ Pod::Spec.new do |spec|
     core_spec.dependency 'URITemplate', '~> 1.1'
     core_spec.source_files = 'Mockingjay/Mockingjay.{h,swift}',
         'Mockingjay/MockingjayProtocol.swift',
-        'Mockingjay/{Matchers,Builders}.swift',
-        'Mockingjay/NSURLSessionConfiguration.m'
+        'Mockingjay/{Matchers,Builders}.swift'
+  end
+
+  spec.subspec 'Session' do |session_spec|
+    session_spec.dependency 'Mockingjay/Core'
+    session_spec.source_files = 'Mockingjay/NSURLSessionConfiguration.swift'
   end
 
   spec.subspec 'XCTest' do |xctest_spec|
