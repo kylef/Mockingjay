@@ -35,35 +35,21 @@ public func uri(uri:String)(request:NSURLRequest) -> Bool {
   return false
 }
 
-public enum HTTPMethod : Printable {
-  case GET
-  case POST
-  case PATCH
-  case PUT
-  case DELETE
-  case OPTIONS
-
-  public var description : String {
-    switch self {
-    case .GET:
-      return "GET"
-    case .POST:
-      return "POST"
-    case .PATCH:
-      return "PATCH"
-    case .PUT:
-      return "PUT"
-    case .DELETE:
-      return "DELETE"
-    case .OPTIONS:
-      return "OPTIONS"
-    }
-  }
+public enum HTTPMethod: String {
+  case OPTIONS = "OPTIONS"
+  case GET = "GET"
+  case HEAD = "HEAD"
+  case POST = "POST"
+  case PUT = "PUT"
+  case PATCH = "PATCH"
+  case DELETE = "DELETE"
+  case TRACE = "TRACE"
+  case CONNECT = "CONNECT"
 }
 
 public func http(method:HTTPMethod, uri:String)(request:NSURLRequest) -> Bool {
   if let requestMethod = request.HTTPMethod {
-    if requestMethod == method.description {
+    if requestMethod == method.rawValue {
       return Mockingjay.uri(uri)(request: request)
     }
   }
