@@ -12,7 +12,7 @@ pod 'Mockingjay'
 
 ## Usage
 
-Mockingly has full integration to XCTest and you simply just need to register a stub, it will automatically be unloaded at the end of your test case. It will also work with the [Quick](https://github.com/Quick/Quick) behaviour-driven development framework.
+Mockingjay has full integration to XCTest and you simply just need to register a stub, it will automatically be unloaded at the end of your test case. It will also work with the [Quick](https://github.com/Quick/Quick) behaviour-driven development framework.
 
 #### Simple stub using a URI Template, returning a response with the given JSON encoded structure
 
