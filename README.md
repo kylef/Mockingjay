@@ -80,6 +80,28 @@ func builder(request:NSURLRequest) -> Response {
 stub(matcher, builder)
 ```
 
+## API Blueprint
+
+![API Blueprint](https://raw.githubusercontent.com/apiaryio/api-blueprint/master/assets/logo_apiblueprint.png)
+
+Mockingjay comes with complete support for the API Blueprint language. Which allows you to stub all of your requests directly from your API description.
+
+To stub all requests from an API Blueprint, you will first need to convert it into it’s AST form in JSON. For this, you can use [Snow Crash](https://github.com/apiaryio/snowcrash).
+
+```bash
+snowcrash -o palaver.apib.json -f json palaver-api-docs/palaver.apib
+```
+
+Then you can simply add the resultant JSON file into your test bundle and then load it in your tests:
+
+```swift
+func setUp() {
+  super.setUp()
+
+  let blueprint = Blueprint(named:"palaver.apib.json")
+}
+```
+
 ## License
 
 Mockingjay is licensed under the BSD license. See [LICENSE](LICENSE) for more
