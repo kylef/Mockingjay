@@ -80,6 +80,22 @@ func builder(request:NSURLRequest) -> Response {
 stub(matcher, builder)
 ```
 
+### Generics
+
+You can make use of the builtin generic matchers and builders. These can be used alone, or in conjunction with custom components.
+
+### Builtin Matchers
+
+- `everything` - Matches every given request.
+- `uri(template)` - Matches using a URI Template.
+- `http(method, template)` - Matches using a HTTP Method and URI Template.
+
+### Builtin Builders
+
+- `failure(error)` - Builds a response using the given error.
+- `http(status, headers, data)` - Constructs a HTTP response using the given status, headers and data.
+- `json(body, status, headers)` - Constructs a JSON HTTP response after serialising the given body as JSON data.
+
 ## License
 
 Mockingjay is licensed under the BSD license. See [LICENSE](LICENSE) for more
