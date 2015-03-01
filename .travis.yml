@@ -3,6 +3,5 @@ before_install:
 - gem install cocoapods --pre
 - gem install xcpretty
 script:
-- xcodebuild -project Mockingjay.xcodeproj -scheme Mockingjay test -sdk macosx | xcpretty -c && exit ${PIPESTATUS[0]}
 - xcodebuild -project Mockingjay.xcodeproj -scheme Mockingjay test -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty -c && exit ${PIPESTATUS[0]}
 - pod lib lint --quick
