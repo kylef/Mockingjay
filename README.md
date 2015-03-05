@@ -45,7 +45,7 @@ stub(everything, failure(error))
 #### Stub with a specific HTTP response
 
 ```swift
-stub(everything, http(404))
+stub(everything, http(status: 404))
 ```
 
 *Note, the `http` builder can take a set of headers and a body too.*
