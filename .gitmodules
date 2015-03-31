@@ -1,3 +1,6 @@
 [submodule "URITemplate"]
 	path = URITemplate
 	url = https://github.com/kylef/URITemplate.swift
+[submodule "representor-swift"]
+	path = representor-swift
+	url = https://github.com/the-hypermedia-project/representor-swift

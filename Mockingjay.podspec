@@ -28,5 +28,10 @@ Pod::Spec.new do |spec|
     xctest_spec.source_files = 'Mockingjay/XCTest.swift'
     xctest_spec.frameworks = 'XCTest'
   end
+
+  spec.subspec 'Blueprint' do |blueprint_spec|
+    blueprint_spec.dependency 'Representor', '~> 0.3.0'
+    blueprint_spec.source_files = 'Mockingjay/Blueprint.swift'
+  end
 end
 
