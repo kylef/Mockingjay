@@ -4,6 +4,8 @@ An elegant library for stubbing HTTP requests in Swift, allowing you to stub any
 
 ## Installation
 
+[CocoaPods](http://cocoapods.org/) is the recommended installation method.
+
 ```ruby
 pod 'Mockingjay'
 ```
