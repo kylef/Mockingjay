@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = 'Mockingjay'
-  spec.version = '0.1.0'
+  spec.version = '0.2.0'
   spec.summary = 'An elegant library for stubbing HTTP requests with ease in Swift.'
   spec.homepage = 'https://github.com/kylef/Mockingjay'
   spec.license = { :type => 'BSD', :file => 'LICENSE' }
