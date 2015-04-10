@@ -13,7 +13,7 @@ import Mockingjay
 
 class FailureBuilderTests : XCTestCase {
   func testFailure() {
-    let request = NSURLRequest()
+    let request = NSURLRequest(URL: NSURL(string: "http://test.com/")!)
     let error = NSError()
 
     let response = failure(error)(request:request)
@@ -22,7 +22,7 @@ class FailureBuilderTests : XCTestCase {
   }
 
   func testHTTP() {
-    let request = NSURLRequest()
+    let request = NSURLRequest(URL: NSURL(string: "http://test.com/")!)
     let error = NSError()
 
     let response = http()(request: request)
@@ -41,7 +41,7 @@ class FailureBuilderTests : XCTestCase {
   }
 
   func testJSON() {
-    let request = NSURLRequest()
+    let request = NSURLRequest(URL: NSURL(string: "http://test.com/")!)
     let error = NSError()
 
     let response = json(["A"])(request: request)
@@ -52,7 +52,7 @@ class FailureBuilderTests : XCTestCase {
         XCTAssertEqual(response.statusCode, 200)
         XCTAssertEqual(response.MIMEType!, "application/json")
         XCTAssertEqual(response.textEncodingName!, "utf-8")
-        let body = NSString(data:data!, encoding:NSUTF8StringEncoding) as String
+        let body = NSString(data:data!, encoding:NSUTF8StringEncoding) as! String
         XCTAssertEqual(body, "[\"A\"]")
       } else {
         XCTFail("Test Failure")

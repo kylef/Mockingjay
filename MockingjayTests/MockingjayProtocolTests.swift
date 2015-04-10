@@ -54,7 +54,7 @@ class MockingjayProtocolTests : XCTestCase {
 
   func testProtocolReturnsResponseWithRegisteredStubError() {
     let request = NSURLRequest(URL: NSURL(string: "https://kylefuller.co.uk/")!)
-    let stubResponse = NSURLResponse(URL: request.URL, MIMEType: "text/plain", expectedContentLength: 5, textEncodingName: "utf-8")
+    let stubResponse = NSURLResponse(URL: request.URL!, MIMEType: "text/plain", expectedContentLength: 5, textEncodingName: "utf-8")
     let stubData = "Hello".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!
 
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in

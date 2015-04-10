@@ -20,13 +20,13 @@ public func everything(request:NSURLRequest) -> Bool {
 public func uri(uri:String)(request:NSURLRequest) -> Bool {
   let template = URITemplate(template:uri)
 
-  if let URLString = request.URL.absoluteString {
+  if let URLString = request.URL?.absoluteString {
     if template.extract(URLString) != nil {
       return true
     }
   }
 
-  if let path = request.URL.path {
+  if let path = request.URL?.path {
     if template.extract(path) != nil {
       return true
     }

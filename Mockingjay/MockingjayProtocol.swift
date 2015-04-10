@@ -45,7 +45,7 @@ public class MockingjayProtocol : NSURLProtocol {
 
   /// Register a matcher and a builder as a new stub
   public class func addStub(matcher:Matcher, builder:Builder) -> Stub {
-    return addStub(Stub(matcher, builder))
+    return addStub(Stub(matcher: matcher, builder: builder))
   }
 
   /// Unregister the given stub
