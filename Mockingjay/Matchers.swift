@@ -42,6 +42,7 @@ public enum HTTPMethod : Printable {
   case PUT
   case DELETE
   case OPTIONS
+  case HEAD
 
   public var description : String {
     switch self {
@@ -57,6 +58,8 @@ public enum HTTPMethod : Printable {
       return "DELETE"
     case .OPTIONS:
       return "OPTIONS"
+    case .HEAD:
+      return "HEAD"
     }
   }
 }
