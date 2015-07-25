@@ -17,13 +17,13 @@ func toString(item:AnyObject) -> String {
 class MockingjaySessionTests: XCTestCase {
   func testEphemeralSessionConfigurationIncludesProtocol() {
     let configuration = NSURLSessionConfiguration.ephemeralSessionConfiguration()
-    let protocolClasses = map(configuration.protocolClasses!, toString)
+    let protocolClasses = (configuration.protocolClasses!).map(toString)
     XCTAssertEqual(protocolClasses.first!, "Mockingjay.MockingjayProtocol")
   }
 
   func testDefaultSessionConfigurationIncludesProtocol() {
     let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-    let protocolClasses = map(configuration.protocolClasses!, toString)
+    let protocolClasses = (configuration.protocolClasses!).map(toString)
     XCTAssertEqual(protocolClasses.first!, "Mockingjay.MockingjayProtocol")
   }
 

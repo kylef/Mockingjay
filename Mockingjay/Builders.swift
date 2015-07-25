@@ -25,7 +25,13 @@ public func http(status:Int = 200, headers:[String:String]? = nil, data:NSData? 
 
 public func json(body:AnyObject, status:Int = 200, headers:[String:String]? = nil)(request:NSURLRequest) -> Response {
   var error:NSError?
-  let data = NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions(), error: &error)
+  let data: NSData?
+  do {
+    data = try NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions())
+  } catch var error1 as NSError {
+    error = error1
+    data = nil
+  }
 
   if let data = data {
     var headers = headers ?? [String:String]()
@@ -33,7 +39,7 @@ public func json(body:AnyObject, status:Int = 200, headers:[String:String]? = ni
       headers["Content-Type"] = "application/json; charset=utf-8"
     }
 
-    return http(status: status, headers: headers, data: data)(request:request)
+    return http(status, headers: headers, data: data)(request:request)
   }
 
   return .Failure(error!)
