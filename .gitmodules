@@ -1,3 +1,4 @@
-[submodule "URITemplate"]
-	path = URITemplate
-	url = https://github.com/kylef/URITemplate.swift
+[submodule "URITemplate.swift"]
+	path = URITemplate.swift
+	url = https://github.com/kylef/URITemplate.swift.git
+	branch = swift-2.0
