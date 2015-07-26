@@ -17,14 +17,14 @@ func toString(item:AnyObject) -> String {
 class MockingjaySessionTests: XCTestCase {
   func testEphemeralSessionConfigurationIncludesProtocol() {
     let configuration = NSURLSessionConfiguration.ephemeralSessionConfiguration()
-    let protocolClasses = (configuration.protocolClasses!).map(toString)
-    XCTAssertEqual(protocolClasses.first!, "Mockingjay.MockingjayProtocol")
+    let protocolClasses = (configuration.protocolClasses!).map({ toString($0) })
+    XCTAssertTrue(protocolClasses.contains("Mockingjay.MockingjayProtocol"))
   }
 
   func testDefaultSessionConfigurationIncludesProtocol() {
     let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-    let protocolClasses = (configuration.protocolClasses!).map(toString)
-    XCTAssertEqual(protocolClasses.first!, "Mockingjay.MockingjayProtocol")
+    let protocolClasses = (configuration.protocolClasses!).map({ toString($0) })
+    XCTAssertTrue(protocolClasses.contains("Mockingjay.MockingjayProtocol"))
   }
 
   func testURLSession() {
@@ -39,7 +39,9 @@ class MockingjaySessionTests: XCTestCase {
     session.dataTaskWithURL(NSURL(string: "https://httpbin.org/")!) { data, response, error in
       dispatch_async(dispatch_get_main_queue()) {
         XCTAssertNotNil(error)
-        XCTAssertEqual(error.domain, "Mockingjay Session Tests")
+        if let error = error {
+          XCTAssertEqual(error.domain, "Mockingjay Session Tests")
+        }
         expectation.fulfill()
       }
     }.resume()

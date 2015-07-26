@@ -14,8 +14,7 @@ import Mockingjay
 class FailureBuilderTests : XCTestCase {
   func testFailure() {
     let request = NSURLRequest(URL: NSURL(string: "http://test.com/")!)
-    let error = NSError()
-
+    let error = NSError(domain: "MockingjayDomain", code: -9999, userInfo: nil)
     let response = failure(error)(request:request)
 
     XCTAssertEqual(response, Response.Failure(error))
@@ -23,12 +22,10 @@ class FailureBuilderTests : XCTestCase {
 
   func testHTTP() {
     let request = NSURLRequest(URL: NSURL(string: "http://test.com/")!)
-    let error = NSError()
-
     let response = http()(request: request)
 
     switch response {
-    case let .Success(response, data):
+    case let .Success(response, _):
       if let response = response as? NSHTTPURLResponse {
         XCTAssertEqual(response.statusCode, 200)
       } else {
@@ -42,8 +39,6 @@ class FailureBuilderTests : XCTestCase {
 
   func testJSON() {
     let request = NSURLRequest(URL: NSURL(string: "http://test.com/")!)
-    let error = NSError()
-
     let response = json(["A"])(request: request)
 
     switch response {

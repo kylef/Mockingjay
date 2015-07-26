@@ -8,7 +8,6 @@
 
 import Foundation
 import XCTest
-import Mockingjay
 
 extension XCTest {
   // MARK: Stubbing

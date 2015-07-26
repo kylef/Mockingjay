@@ -28,7 +28,7 @@ public func json(body:AnyObject, status:Int = 200, headers:[String:String]? = ni
   let data: NSData?
   do {
     data = try NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions())
-  } catch var error1 as NSError {
+  } catch let error1 as NSError {
     error = error1
     data = nil
   }

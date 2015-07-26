@@ -25,7 +25,7 @@ class MockingjayProtocolTests : XCTestCase {
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
     }) { (request) -> (Response) in
-      return Response.Failure(NSError())
+      return Response.Failure(NSError(domain: "MockingjayTestDomain", code: -9999, userInfo: nil))
     }
 
     let canInitWithRequest = MockingjayProtocol.canInitWithRequest(request)
@@ -48,7 +48,7 @@ class MockingjayProtocolTests : XCTestCase {
     let data: NSData?
     do {
       data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
-    } catch var error1 as NSError {
+    } catch let error1 as NSError {
       error = error1
       data = nil
     }
@@ -74,7 +74,7 @@ class MockingjayProtocolTests : XCTestCase {
     let data: NSData?
     do {
       data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
-    } catch var error1 as NSError {
+    } catch let error1 as NSError {
       error = error1
       data = nil
     }
