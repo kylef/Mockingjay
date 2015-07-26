@@ -55,13 +55,13 @@ class HTTPMatcherTests : XCTestCase {
     let request = NSMutableURLRequest(URL: NSURL(string: "https://api.palaverapp.com/")!)
     request.HTTPMethod = "PATCH"
 
-    XCTAssertTrue(http(.PATCH, "https://api.palaverapp.com/")(request:request))
+    XCTAssertTrue(http(.PATCH, uri: "https://api.palaverapp.com/")(request:request))
   }
 
   func testMethodMismatch() {
     let request = NSMutableURLRequest(URL: NSURL(string: "https://api.palaverapp.com/")!)
     request.HTTPMethod = "GET"
 
-    XCTAssertFalse(http(.PATCH, "https://api.palaverapp.com/")(request:request))
+    XCTAssertFalse(http(.PATCH, uri: "https://api.palaverapp.com/")(request:request))
   }
 }

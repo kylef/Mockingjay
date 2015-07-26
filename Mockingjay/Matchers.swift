@@ -35,7 +35,7 @@ public func uri(uri:String)(request:NSURLRequest) -> Bool {
   return false
 }
 
-public enum HTTPMethod : Printable {
+public enum HTTPMethod : CustomStringConvertible {
   case GET
   case POST
   case PATCH

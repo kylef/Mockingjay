@@ -50,7 +50,7 @@ public class MockingjayProtocol : NSURLProtocol {
 
   /// Unregister the given stub
   public class func removeStub(stub:Stub) {
-    if let index = find(stubs, stub) {
+    if let index = stubs.indexOf(stub) {
       stubs.removeAtIndex(index)
     }
   }
