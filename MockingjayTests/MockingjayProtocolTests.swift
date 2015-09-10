@@ -25,7 +25,7 @@ class MockingjayProtocolTests : XCTestCase {
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
     }) { (request) -> (Response) in
-      return Response.Failure(NSError())
+      return Response.Failure(NSError(domain: "MockingjayTests", code: 0, userInfo: nil))
     }
 
     let canInitWithRequest = MockingjayProtocol.canInitWithRequest(request)
@@ -45,7 +45,12 @@ class MockingjayProtocolTests : XCTestCase {
 
     var response:NSURLResponse?
     var error:NSError?
-    let data = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &error)
+    var data: NSData? = nil
+    do {
+      data = try NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+    } catch let error1 as NSError {
+      error = error1
+    }
 
     XCTAssertNil(response)
     XCTAssertNil(data)
@@ -64,12 +69,10 @@ class MockingjayProtocolTests : XCTestCase {
     }
 
     var response:NSURLResponse?
-    var error:NSError?
-    let data = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &error)
+    let data = try! NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
 
     XCTAssertEqual(response!.URL!, stubResponse.URL!)
     XCTAssertEqual(response!.textEncodingName!, "utf-8")
-    XCTAssertEqual(data!, stubData)
-    XCTAssertNil(error)
+    XCTAssertEqual(data, stubData)
   }
 }
