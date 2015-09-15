@@ -23,7 +23,6 @@ class FailureBuilderTests : XCTestCase {
 
   func testHTTP() {
     let request = NSURLRequest(URL: NSURL(string: "http://test.com/")!)
-    let error = NSError(domain: "MockingjayTests", code: 0, userInfo: nil)
 
     let response = http()(request: request)
 
@@ -42,7 +41,6 @@ class FailureBuilderTests : XCTestCase {
 
   func testJSON() {
     let request = NSURLRequest(URL: NSURL(string: "http://test.com/")!)
-    let error = NSError(domain: "MockingjayTests", code: 0, userInfo: nil)
 
     let response = json(["A"])(request: request)
 
