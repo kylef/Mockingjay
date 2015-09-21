@@ -110,7 +110,7 @@ override func setUp {
   super.setUp()
   let path = NSBundle(forClass: self.dynamicType).pathForResource("fixture", ofType: "json")!
   let data = NSData(contentsOfFile: path)!
-  stub(everything, builder: jsonData(data))
+  stub(matcher, builder: jsonData(data))
 }
 ```
 
