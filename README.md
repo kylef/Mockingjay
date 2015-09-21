@@ -99,6 +99,7 @@ You can make use of the builtin generic matchers and builders. These can be used
 - `failure(error)` - Builds a response using the given error.
 - `http(status, headers, data)` - Constructs a HTTP response using the given status, headers and data.
 - `json(body, status, headers)` - Constructs a JSON HTTP response after serialising the given body as JSON data.
+- `jsonData(data, status, headers)` - Constructs a JSON HTTP response with raw JSON data.
 
 ## License
 
