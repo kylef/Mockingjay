@@ -10,7 +10,7 @@ import Foundation
 
 
 /// Structure representing a registered stub
-public struct Stub : Equatable {
+struct Stub : Equatable {
   let matcher:Matcher
   let builder:Builder
   let uuid:NSUUID
@@ -22,13 +22,13 @@ public struct Stub : Equatable {
   }
 }
 
-public func ==(lhs:Stub, rhs:Stub) -> Bool {
+func ==(lhs:Stub, rhs:Stub) -> Bool {
   return lhs.uuid == rhs.uuid
 }
 
 var stubs = [Stub]()
 
-public class MockingjayProtocol : NSURLProtocol {
+class MockingjayProtocol : NSURLProtocol {
   // MARK: Stubs
 
   class func addStub(stub:Stub) -> Stub {
@@ -44,19 +44,19 @@ public class MockingjayProtocol : NSURLProtocol {
   }
 
   /// Register a matcher and a builder as a new stub
-  public class func addStub(matcher:Matcher, builder:Builder) -> Stub {
+  class func addStub(matcher:Matcher, builder:Builder) -> Stub {
     return addStub(Stub(matcher: matcher, builder: builder))
   }
 
   /// Unregister the given stub
-  public class func removeStub(stub:Stub) {
+  class func removeStub(stub:Stub) {
     if let index = stubs.indexOf(stub) {
       stubs.removeAtIndex(index)
     }
   }
 
   /// Remove all registered stubs
-  public class func removeAllStubs() {
+  class func removeAllStubs() {
     stubs.removeAll(keepCapacity: false)
   }
 
@@ -72,15 +72,15 @@ public class MockingjayProtocol : NSURLProtocol {
 
   // MARK: NSURLProtocol
 
-  override public class func canInitWithRequest(request:NSURLRequest) -> Bool {
+  override class func canInitWithRequest(request:NSURLRequest) -> Bool {
     return stubForRequest(request) != nil
   }
 
-  override public class func canonicalRequestForRequest(request: NSURLRequest) -> NSURLRequest {
+  override class func canonicalRequestForRequest(request: NSURLRequest) -> NSURLRequest {
     return request
   }
 
-  override public func startLoading() {
+  override func startLoading() {
     if let stub = MockingjayProtocol.stubForRequest(request) {
       switch stub.builder(request) {
       case .Failure(let error):
@@ -100,5 +100,5 @@ public class MockingjayProtocol : NSURLProtocol {
     }
   }
 
-  override public func stopLoading() {}
+  override func stopLoading() {}
 }
