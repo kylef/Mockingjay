@@ -101,6 +101,19 @@ You can make use of the builtin generic matchers and builders. These can be used
 - `json(body, status, headers)` - Constructs a JSON HTTP response after serialising the given body as JSON data.
 - `jsonData(data, status, headers)` - Constructs a JSON HTTP response with raw JSON data.
 
+### Using JSON files as test fixtures
+
+During `setUp`, load the JSON file as `NSData` and use `jsonData`.
+
+```swift
+override func setUp {
+  super.setUp()
+  let path = NSBundle(forClass: self.dynamicType).pathForResource("fixture", ofType: "json")!
+  let data = NSData(contentsOfFile: path)!
+  stub(everything, builder: jsonData(data))
+}
+```
+
 ## License
 
 Mockingjay is licensed under the BSD license. See [LICENSE](LICENSE) for more
