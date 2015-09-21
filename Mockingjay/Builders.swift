@@ -24,15 +24,19 @@ public func http(status:Int = 200, headers:[String:String]? = nil, data:NSData? 
 }
 
 public func json(body:AnyObject, status:Int = 200, headers:[String:String]? = nil)(request:NSURLRequest) -> Response {
-  do {
-    let data = try NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions())
+    do {
+      let data = try NSJSONSerialization.dataWithJSONObject(body, options: NSJSONWritingOptions())
+      return jsonData(data, status: status, headers: headers)(request: request)
+    } catch {
+      return .Failure(error as NSError)
+  }
+}
+
+public func jsonData(data: NSData, status: Int = 200, headers: [String:String]? = nil)(request:NSURLRequest) -> Response {
     var headers = headers ?? [String:String]()
     if headers["Content-Type"] == nil {
       headers["Content-Type"] = "application/json; charset=utf-8"
     }
 
     return http(status, headers: headers, data: data)(request:request)
-  } catch {
-    return .Failure(error as NSError)
-  }
 }

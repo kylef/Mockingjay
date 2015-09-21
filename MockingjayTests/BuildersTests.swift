@@ -60,4 +60,28 @@ class FailureBuilderTests : XCTestCase {
       XCTFail("Test Failure")
     }
   }
+
+  func testJSONData() {
+    let request = NSURLRequest(URL: NSURL(string: "http://test.com")!)
+
+    let data = "[\"B\"]".dataUsingEncoding(NSUTF8StringEncoding)!
+
+    let response = jsonData(data)(request: request)
+
+    switch response {
+    case let .Success(response, data):
+      if let response = response as? NSHTTPURLResponse {
+        XCTAssertEqual(response.statusCode, 200)
+        XCTAssertEqual(response.MIMEType!, "application/json")
+        XCTAssertEqual(response.textEncodingName!, "utf-8")
+        let body = NSString(data:data!, encoding:NSUTF8StringEncoding) as! String
+        XCTAssertEqual(body, "[\"B\"]")
+      } else {
+        XCTFail("Test Failure")
+      }
+      break
+    default:
+      XCTFail("Test Failure")
+    }
+  }
 }
