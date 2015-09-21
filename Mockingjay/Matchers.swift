@@ -12,12 +12,12 @@ import URITemplate
 // Collection of generic matchers
 
 /// Mockingjay matcher which returns true for every request
-public func everything(request:NSURLRequest) -> Bool {
+func everything(request:NSURLRequest) -> Bool {
   return true
 }
 
 /// Mockingjay matcher which matches URIs
-public func uri(uri:String)(request:NSURLRequest) -> Bool {
+func uri(uri:String)(request:NSURLRequest) -> Bool {
   let template = URITemplate(template:uri)
 
   if let URLString = request.URL?.absoluteString {
@@ -35,7 +35,7 @@ public func uri(uri:String)(request:NSURLRequest) -> Bool {
   return false
 }
 
-public enum HTTPMethod : CustomStringConvertible {
+enum HTTPMethod : CustomStringConvertible {
   case GET
   case POST
   case PATCH
@@ -44,7 +44,7 @@ public enum HTTPMethod : CustomStringConvertible {
   case OPTIONS
   case HEAD
 
-  public var description : String {
+  var description : String {
     switch self {
     case .GET:
       return "GET"
@@ -64,7 +64,7 @@ public enum HTTPMethod : CustomStringConvertible {
   }
 }
 
-public func http(method:HTTPMethod, uri:String)(request:NSURLRequest) -> Bool {
+func http(method:HTTPMethod, uri:String)(request:NSURLRequest) -> Bool {
   if let requestMethod = request.HTTPMethod {
     if requestMethod == method.description {
       return Mockingjay.uri(uri)(request: request)

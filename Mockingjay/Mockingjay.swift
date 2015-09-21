@@ -8,12 +8,12 @@
 
 import Foundation
 
-public enum Response : Equatable {
+enum Response : Equatable {
   case Success(NSURLResponse, NSData?)
   case Failure(NSError)
 }
 
-public func ==(lhs:Response, rhs:Response) -> Bool {
+func ==(lhs:Response, rhs:Response) -> Bool {
   switch (lhs, rhs) {
   case let (.Failure(lhsError), .Failure(rhsError)):
     return lhsError == rhsError
@@ -24,5 +24,5 @@ public func ==(lhs:Response, rhs:Response) -> Bool {
   }
 }
 
-public typealias Matcher = (NSURLRequest) -> (Bool)
-public typealias Builder = (NSURLRequest) -> (Response)
+typealias Matcher = (NSURLRequest) -> (Bool)
+typealias Builder = (NSURLRequest) -> (Response)

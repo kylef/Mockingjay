@@ -8,7 +8,7 @@
 
 import Foundation
 import XCTest
-import Mockingjay
+@testable import Mockingjay
 
 
 class FailureBuilderTests : XCTestCase {
