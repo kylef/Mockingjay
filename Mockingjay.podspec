@@ -27,6 +27,7 @@ Pod::Spec.new do |spec|
     xctest_spec.dependency 'Mockingjay/Core'
     xctest_spec.source_files = 'Mockingjay/XCTest.swift'
     xctest_spec.frameworks = 'XCTest'
+    xctest_spec.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
   end
 end
 
