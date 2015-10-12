@@ -31,6 +31,7 @@ extension XCTest {
       let tearDown = class_getInstanceMethod(self, "tearDown")
       let mockingjayTearDown = class_getInstanceMethod(self, "mockingjayTearDown")
       method_exchangeImplementations(tearDown, mockingjayTearDown)
+      NSURLSessionConfiguration.mockingjaySwizzleDefaultSessionConfiguration()
     }
   }
 

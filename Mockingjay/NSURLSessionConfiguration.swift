@@ -9,16 +9,14 @@
 import Foundation
 
 extension NSURLSessionConfiguration {
-  override public class func initialize() {
-    if (self === NSURLSessionConfiguration.self) {
-      let defaultSessionConfiguration = class_getClassMethod(self, "defaultSessionConfiguration")
-      let mockingjayDefaultSessionConfiguration = class_getClassMethod(self, "mockingjayDefaultSessionConfiguration")
-      method_exchangeImplementations(defaultSessionConfiguration, mockingjayDefaultSessionConfiguration)
+  class func mockingjaySwizzleDefaultSessionConfiguration() {
+    let defaultSessionConfiguration = class_getClassMethod(self, "defaultSessionConfiguration")
+    let mockingjayDefaultSessionConfiguration = class_getClassMethod(self, "mockingjayDefaultSessionConfiguration")
+    method_exchangeImplementations(defaultSessionConfiguration, mockingjayDefaultSessionConfiguration)
 
-      let ephemeralSessionConfiguration = class_getClassMethod(self, "ephemeralSessionConfiguration")
-      let mockingjayEphemeralSessionConfiguration = class_getClassMethod(self, "mockingjayEphemeralSessionConfiguration")
-      method_exchangeImplementations(ephemeralSessionConfiguration, mockingjayEphemeralSessionConfiguration)
-    }
+    let ephemeralSessionConfiguration = class_getClassMethod(self, "ephemeralSessionConfiguration")
+    let mockingjayEphemeralSessionConfiguration = class_getClassMethod(self, "mockingjayEphemeralSessionConfiguration")
+    method_exchangeImplementations(ephemeralSessionConfiguration, mockingjayEphemeralSessionConfiguration)
   }
 
   class func mockingjayDefaultSessionConfiguration() -> NSURLSessionConfiguration {
