@@ -485,6 +485,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2746CDDE1A702FC100719B66 /* UniversalFramework_Test.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -500,6 +501,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2746CDDE1A702FC100719B66 /* UniversalFramework_Test.xcconfig */;
 			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = MockingjayTests/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocode.$(PRODUCT_NAME:rfc1034identifier)";
