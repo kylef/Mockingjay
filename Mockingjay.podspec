@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = 'Mockingjay'
-  spec.version = '1.1.0'
+  spec.version = '1.1.1'
   spec.summary = 'An elegant library for stubbing HTTP requests with ease in Swift.'
   spec.homepage = 'https://github.com/kylef/Mockingjay'
   spec.license = { :type => 'BSD', :file => 'LICENSE' }
@@ -15,12 +15,8 @@ Pod::Spec.new do |spec|
     core_spec.dependency 'URITemplate', '~> 1.3'
     core_spec.source_files = 'Mockingjay/Mockingjay.{h,swift}',
         'Mockingjay/MockingjayProtocol.swift',
-        'Mockingjay/{Matchers,Builders}.swift'
-  end
-
-  spec.subspec 'Session' do |session_spec|
-    session_spec.dependency 'Mockingjay/Core'
-    session_spec.source_files = 'Mockingjay/NSURLSessionConfiguration.swift'
+        'Mockingjay/{Matchers,Builders}.swift',
+        'Mockingjay/NSURLSessionConfiguration.swift'
   end
 
   spec.subspec 'XCTest' do |xctest_spec|
