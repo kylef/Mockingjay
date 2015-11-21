@@ -12,6 +12,11 @@ import Mockingjay
 
 
 class MockingjayProtocolTests : XCTestCase {
+  override func tearDown() {
+    super.tearDown()
+    MockingjayProtocol.removeAllStubs()
+  }
+
   func testCannotInitWithUnknownRequest() {
     let request = NSURLRequest(URL: NSURL(string: "https://kylefuller.co.uk/")!)
     let canInitWithRequest = MockingjayProtocol.canInitWithRequest(request)
@@ -35,12 +40,12 @@ class MockingjayProtocolTests : XCTestCase {
 
   func testProtocolReturnsErrorWithRegisteredStubError() {
     let request = NSURLRequest(URL: NSURL(string: "https://kylefuller.co.uk/")!)
-    let stubError = NSError(domain: "Mockingjay Tests", code: 0, userInfo: nil)
+    let stubError = NSError(domain: "MockingjayTests", code: 0, userInfo: nil)
 
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
     }) { (request) -> (Response) in
-        return Response.Failure(stubError)
+      return Response.Failure(stubError)
     }
 
     var response:NSURLResponse?
@@ -54,8 +59,7 @@ class MockingjayProtocolTests : XCTestCase {
 
     XCTAssertNil(response)
     XCTAssertNil(data)
-    XCTAssertEqual(error!.domain, "Mockingjay Tests")
-  }
+    XCTAssertEqual(error!.domain, "MockingjayTests")  }
 
   func testProtocolReturnsResponseWithRegisteredStubError() {
     let request = NSURLRequest(URL: NSURL(string: "https://kylefuller.co.uk/")!)
@@ -64,15 +68,15 @@ class MockingjayProtocolTests : XCTestCase {
 
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
-      }) { (request) -> (Response) in
-        return Response.Success(stubResponse, stubData)
+    }) { (request) -> (Response) in
+      return Response.Success(stubResponse, stubData)
     }
 
     var response:NSURLResponse?
-    let data = try! NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+    let data = try? NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
 
-    XCTAssertEqual(response!.URL!, stubResponse.URL!)
-    XCTAssertEqual(response!.textEncodingName!, "utf-8")
+    XCTAssertEqual(response?.URL, stubResponse.URL!)
+    XCTAssertEqual(response?.textEncodingName, "utf-8")
     XCTAssertEqual(data, stubData)
   }
 }

@@ -15,6 +15,11 @@ func toString(item:AnyClass) -> String {
 }
 
 class MockingjaySessionTests: XCTestCase {
+  override func setUp() {
+    super.setUp()
+    NSURLSessionConfiguration.mockingjaySwizzleDefaultSessionConfiguration()
+  }
+
   func testEphemeralSessionConfigurationIncludesProtocol() {
     let configuration = NSURLSessionConfiguration.ephemeralSessionConfiguration()
     let protocolClasses = (configuration.protocolClasses!).map(toString)
