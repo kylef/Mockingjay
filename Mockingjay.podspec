@@ -25,5 +25,10 @@ Pod::Spec.new do |spec|
     xctest_spec.frameworks = 'XCTest'
     xctest_spec.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
   end
+
+  spec.subspec 'Blueprint' do |blueprint_spec|
+    blueprint_spec.dependency 'Representor', '~> 0.3.0'
+    blueprint_spec.source_files = 'Mockingjay/Blueprint.swift'
+  end
 end
 

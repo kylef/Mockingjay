@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		273E7B9C1ACA2B4E006449A1 /* Representor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 273E7B961ACA2B28006449A1 /* Representor.framework */; };
+		273E7B9E1ACA2B5D006449A1 /* Blueprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 273E7B9D1ACA2B5D006449A1 /* Blueprint.swift */; };
 		274367921AA27A7C0030C97B /* Mockingjay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367911AA27A7C0030C97B /* Mockingjay.swift */; };
 		274367941AA27AAD0030C97B /* MockingjayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367931AA27AAD0030C97B /* MockingjayProtocol.swift */; };
 		274367961AA27B170030C97B /* MockingjayProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367951AA27B170030C97B /* MockingjayProtocolTests.swift */; };
@@ -23,6 +25,27 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		273E7B951ACA2B28006449A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 273E7B8E1ACA2B28006449A1 /* Representor.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 770834631A0913860008869E;
+			remoteInfo = Representor;
+		};
+		273E7B971ACA2B28006449A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 273E7B8E1ACA2B28006449A1 /* Representor.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 7708346E1A0913860008869E;
+			remoteInfo = RepresentorTests;
+		};
+		273E7B9A1ACA2B45006449A1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 273E7B8E1ACA2B28006449A1 /* Representor.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 770834621A0913860008869E;
+			remoteInfo = Representor;
+		};
 		274367A81AA29ADA0030C97B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 274367A31AA29ADA0030C97B /* URITemplate.xcodeproj */;
@@ -54,6 +77,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		273E7B8E1ACA2B28006449A1 /* Representor.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Representor.xcodeproj; path = "representor-swift/Representor.xcodeproj"; sourceTree = "<group>"; };
+		273E7B9D1ACA2B5D006449A1 /* Blueprint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Blueprint.swift; sourceTree = "<group>"; };
 		274367911AA27A7C0030C97B /* Mockingjay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mockingjay.swift; sourceTree = "<group>"; };
 		274367931AA27AAD0030C97B /* MockingjayProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockingjayProtocol.swift; sourceTree = "<group>"; };
 		274367951AA27B170030C97B /* MockingjayProtocolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockingjayProtocolTests.swift; sourceTree = "<group>"; };
@@ -80,6 +105,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				273E7B9C1ACA2B4E006449A1 /* Representor.framework in Frameworks */,
 				274367AE1AA29AED0030C97B /* URITemplate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -95,6 +121,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		273E7B8F1ACA2B28006449A1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				273E7B961ACA2B28006449A1 /* Representor.framework */,
+				273E7B981ACA2B28006449A1 /* RepresentorTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		274367A41AA29ADA0030C97B /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +142,7 @@
 		2746CDB51A702F7800719B66 = {
 			isa = PBXGroup;
 			children = (
+				273E7B8E1ACA2B28006449A1 /* Representor.xcodeproj */,
 				274367A31AA29ADA0030C97B /* URITemplate.xcodeproj */,
 				2746CDDB1A702FC100719B66 /* Configurations */,
 				2746CDC11A702F7800719B66 /* Mockingjay */,
@@ -136,6 +172,7 @@
 				274367931AA27AAD0030C97B /* MockingjayProtocol.swift */,
 				2743679B1AA28D4D0030C97B /* XCTest.swift */,
 				274367C51AA35FD00030C97B /* NSURLSessionConfiguration.swift */,
+				273E7B9D1ACA2B5D006449A1 /* Blueprint.swift */,
 				2746CDC21A702F7800719B66 /* Supporting Files */,
 			);
 			path = Mockingjay;
@@ -205,6 +242,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				273E7B9B1ACA2B45006449A1 /* PBXTargetDependency */,
 				274367AD1AA29AE70030C97B /* PBXTargetDependency */,
 			);
 			name = Mockingjay;
@@ -261,6 +299,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 273E7B8F1ACA2B28006449A1 /* Products */;
+					ProjectRef = 273E7B8E1ACA2B28006449A1 /* Representor.xcodeproj */;
+				},
+				{
 					ProductGroup = 274367A41AA29ADA0030C97B /* Products */;
 					ProjectRef = 274367A31AA29ADA0030C97B /* URITemplate.xcodeproj */;
 				},
@@ -274,6 +316,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		273E7B961ACA2B28006449A1 /* Representor.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Representor.framework;
+			remoteRef = 273E7B951ACA2B28006449A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		273E7B981ACA2B28006449A1 /* RepresentorTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = RepresentorTests.xctest;
+			remoteRef = 273E7B971ACA2B28006449A1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		274367A91AA29ADA0030C97B /* URITemplate.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
@@ -314,6 +370,7 @@
 			files = (
 				274367981AA28AFC0030C97B /* Matchers.swift in Sources */,
 				274367921AA27A7C0030C97B /* Mockingjay.swift in Sources */,
+				273E7B9E1ACA2B5D006449A1 /* Blueprint.swift in Sources */,
 				A1E3C5701AA4EA130069C998 /* XCTest.swift in Sources */,
 				274367C61AA35FD00030C97B /* NSURLSessionConfiguration.swift in Sources */,
 				274367941AA27AAD0030C97B /* MockingjayProtocol.swift in Sources */,
@@ -335,6 +392,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		273E7B9B1ACA2B45006449A1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Representor;
+			targetProxy = 273E7B9A1ACA2B45006449A1 /* PBXContainerItemProxy */;
+		};
 		274367AD1AA29AE70030C97B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = URITemplate;
