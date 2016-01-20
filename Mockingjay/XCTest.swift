@@ -6,16 +6,32 @@
 //  Copyright (c) 2015 Cocode. All rights reserved.
 //
 
-import Foundation
+import ObjectiveC
 import XCTest
 
 var mockingjayTearDownSwizzleToken: dispatch_once_t = 0
 
+var AssociatedMockingjayRemoveStubOnTearDownHandle: UInt8 = 0
 extension XCTest {
   // MARK: Stubbing
 
+  /// Whether Mockingjay should remove stubs on teardown
+  public var mockingjayRemoveStubOnTearDown: Bool {
+    get {
+      let associatedResult = objc_getAssociatedObject(self, &AssociatedMockingjayRemoveStubOnTearDownHandle) as? Bool
+      return associatedResult ?? true
+    }
+
+    set {
+      objc_setAssociatedObject(self, &AssociatedMockingjayRemoveStubOnTearDownHandle, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+    }
+  }
+
   public func stub(matcher:Matcher, builder:Builder) -> Stub {
-    XCTest.mockingjaySwizzleTearDown()
+    if mockingjayRemoveStubOnTearDown {
+      XCTest.mockingjaySwizzleTearDown()
+    }
+
     NSURLSessionConfiguration.mockingjaySwizzleDefaultSessionConfiguration()
 
     return MockingjayProtocol.addStub(matcher, builder: builder)
@@ -41,6 +57,9 @@ extension XCTest {
 
   func mockingjayTearDown() {
     mockingjayTearDown()
-    MockingjayProtocol.removeAllStubs()
+
+    if mockingjayRemoveStubOnTearDown {
+      MockingjayProtocol.removeAllStubs()
+    }
   }
 }

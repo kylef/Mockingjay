@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2705946B1C4FA7A6002A3AA9 /* MockingjayXCTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2705946A1C4FA7A6002A3AA9 /* MockingjayXCTestTests.swift */; };
 		274367921AA27A7C0030C97B /* Mockingjay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367911AA27A7C0030C97B /* Mockingjay.swift */; };
 		274367941AA27AAD0030C97B /* MockingjayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367931AA27AAD0030C97B /* MockingjayProtocol.swift */; };
 		274367961AA27B170030C97B /* MockingjayProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367951AA27B170030C97B /* MockingjayProtocolTests.swift */; };
@@ -54,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2705946A1C4FA7A6002A3AA9 /* MockingjayXCTestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockingjayXCTestTests.swift; sourceTree = "<group>"; };
 		274367911AA27A7C0030C97B /* Mockingjay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mockingjay.swift; sourceTree = "<group>"; };
 		274367931AA27AAD0030C97B /* MockingjayProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockingjayProtocol.swift; sourceTree = "<group>"; };
 		274367951AA27B170030C97B /* MockingjayProtocolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockingjayProtocolTests.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				274367951AA27B170030C97B /* MockingjayProtocolTests.swift */,
 				274367991AA28B0D0030C97B /* MatcherTests.swift */,
 				274367B11AA29E620030C97B /* BuildersTests.swift */,
+				2705946A1C4FA7A6002A3AA9 /* MockingjayXCTestTests.swift */,
 				2746CDCF1A702F7800719B66 /* Supporting Files */,
 			);
 			path = MockingjayTests;
@@ -328,6 +331,7 @@
 				2743679A1AA28B0D0030C97B /* MatcherTests.swift in Sources */,
 				274367961AA27B170030C97B /* MockingjayProtocolTests.swift in Sources */,
 				274367B21AA29E620030C97B /* BuildersTests.swift in Sources */,
+				2705946B1C4FA7A6002A3AA9 /* MockingjayXCTestTests.swift in Sources */,
 				2746CDD21A702F7800719B66 /* MockingjayTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
