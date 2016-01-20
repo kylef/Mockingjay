@@ -60,8 +60,11 @@ public class MockingjayProtocol : NSURLProtocol {
     stubs.removeAll(keepCapacity: false)
   }
 
+  /// Finds the appropriate stub for a request
+  /// This method searches backwards though the registered requests
+  /// to find the last registered stub that handles the request.
   class func stubForRequest(request:NSURLRequest) -> Stub? {
-    for stub in stubs {
+    for stub in stubs.reverse() {
       if stub.matcher(request) {
         return stub
       }
@@ -72,6 +75,7 @@ public class MockingjayProtocol : NSURLProtocol {
 
   // MARK: NSURLProtocol
 
+  /// Returns whether there is a registered stub handler for the given request.
   override public class func canInitWithRequest(request:NSURLRequest) -> Bool {
     return stubForRequest(request) != nil
   }

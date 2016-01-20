@@ -79,4 +79,30 @@ class MockingjayProtocolTests : XCTestCase {
     XCTAssertEqual(response?.textEncodingName, "utf-8")
     XCTAssertEqual(data, stubData)
   }
+
+  func testProtocolReturnsResponseWithLastRegisteredMatchinbgStub() {
+    let request = NSURLRequest(URL: NSURL(string: "https://fuller.li/")!)
+    let stubResponse = NSURLResponse(URL: request.URL!, MIMEType: "text/plain", expectedContentLength: 6, textEncodingName: "utf-8")
+    let stub1Data = "Stub 1".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!
+    let stub2Data = "Stub 2".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!
+
+    MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
+      return true
+    }) { (request) -> (Response) in
+        return Response.Success(stubResponse, stub1Data)
+    }
+
+    MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
+      return true
+    }) { (request) -> (Response) in
+        return Response.Success(stubResponse, stub2Data)
+    }
+
+    var response:NSURLResponse?
+    let data = try? NSURLConnection.sendSynchronousRequest(request, returningResponse: &response)
+
+    XCTAssertEqual(response?.URL, stubResponse.URL!)
+    XCTAssertEqual(response?.textEncodingName, "utf-8")
+    XCTAssertEqual(data, stub2Data)
+  }
 }
