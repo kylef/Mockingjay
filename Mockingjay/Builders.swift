@@ -40,3 +40,13 @@ public func jsonData(data: NSData, status: Int = 200, headers: [String:String]? 
 
   return http(status, headers: headers, data: data)(request:request)
 }
+
+public func plain(body:String, status:Int = 200, headers:[String:String]? = nil)(request:NSURLRequest) -> Response {
+  var headers = headers ?? [String:String]()
+  if headers["Content-Type"] == nil {
+    headers["Content-Type"] = "text/plain; charset=utf-8"
+  }
+  
+  let data = body.dataUsingEncoding(NSUTF8StringEncoding)
+  return http(status, headers: headers, data: data)(request:request)
+}
