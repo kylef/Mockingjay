@@ -93,12 +93,13 @@ public class MockingjayProtocol : NSURLProtocol {
         client?.URLProtocol(self, didFailWithError: error)
       case .Success(var response, var data, let downloadOption):
         if let range = extractRangeFromHTTPHeaders(request.allHTTPHeaderFields) {
+          let fullLength = data?.length
           data = data?.subdataWithRange(range)
           
-          if let r = response as? NSHTTPURLResponse, data = data {
+          if let r = response as? NSHTTPURLResponse, data = data, fullLength = fullLength {
             var header = r.allHeaderFields as! [String:String]
             header["Content-Length"] = String(data.length)
-            header["Content-Range"] = String(range.httpRangeStringWithFullLength(data.length))
+            header["Content-Range"] = String(range.httpRangeStringWithFullLength(fullLength))
             response = NSHTTPURLResponse(URL: r.URL!, statusCode: r.statusCode, HTTPVersion: nil, headerFields: header)!
           }
         }
