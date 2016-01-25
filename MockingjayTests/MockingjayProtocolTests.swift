@@ -69,7 +69,7 @@ class MockingjayProtocolTests : XCTestCase {
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
     }) { (request) -> (Response) in
-      return Response.Success(stubResponse, stubData)
+      return Response.Success(stubResponse, stubData, .DownloadAll)
     }
 
     var response:NSURLResponse?
@@ -89,13 +89,13 @@ class MockingjayProtocolTests : XCTestCase {
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
     }) { (request) -> (Response) in
-        return Response.Success(stubResponse, stub1Data)
+        return Response.Success(stubResponse, stub1Data, .DownloadAll)
     }
 
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
     }) { (request) -> (Response) in
-        return Response.Success(stubResponse, stub2Data)
+        return Response.Success(stubResponse, stub2Data, .DownloadAll)
     }
 
     var response:NSURLResponse?
@@ -105,4 +105,5 @@ class MockingjayProtocolTests : XCTestCase {
     XCTAssertEqual(response?.textEncodingName, "utf-8")
     XCTAssertEqual(data, stub2Data)
   }
+  
 }

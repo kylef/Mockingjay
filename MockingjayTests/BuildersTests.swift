@@ -27,7 +27,7 @@ class FailureBuilderTests : XCTestCase {
     let response = http()(request: request)
 
     switch response {
-    case let .Success(response, _):
+    case let .Success(response, _, _):
       if let response = response as? NSHTTPURLResponse {
         XCTAssertEqual(response.statusCode, 200)
       } else {
@@ -38,6 +38,24 @@ class FailureBuilderTests : XCTestCase {
       XCTFail("Test Failure")
     }
   }
+  
+  func testHTTPDownloadOption() {
+    let request = NSURLRequest(URL: NSURL(string: "http://test.com/")!)
+    let response = http(downloadOption: .DownloadInChunksOf(bytes: 1024))(request: request)
+    
+    switch response {
+    case let .Success(_, _, downloadOption):
+      switch downloadOption {
+      case .DownloadInChunksOf(bytes: let bytes):
+        XCTAssertEqual(bytes, 1024)
+      case .DownloadAll:
+        XCTFail("Unexpected Download Option")
+      }
+    default:
+      XCTFail("Test Failure")
+    }
+    
+  }
 
   func testJSON() {
     let request = NSURLRequest(URL: NSURL(string: "http://test.com/")!)
@@ -45,7 +63,7 @@ class FailureBuilderTests : XCTestCase {
     let response = json(["A"])(request: request)
 
     switch response {
-    case let .Success(response, data):
+    case let .Success(response, data, _):
       if let response = response as? NSHTTPURLResponse {
         XCTAssertEqual(response.statusCode, 200)
         XCTAssertEqual(response.MIMEType!, "application/json")
@@ -69,7 +87,7 @@ class FailureBuilderTests : XCTestCase {
     let response = jsonData(data)(request: request)
 
     switch response {
-    case let .Success(response, data):
+    case let .Success(response, data, _):
       if let response = response as? NSHTTPURLResponse {
         XCTAssertEqual(response.statusCode, 200)
         XCTAssertEqual(response.MIMEType!, "application/json")

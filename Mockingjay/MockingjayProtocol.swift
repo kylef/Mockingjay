@@ -30,6 +30,7 @@ var stubs = [Stub]()
 
 public class MockingjayProtocol : NSURLProtocol {
   // MARK: Stubs
+  private var enableDownloading = true
 
   class func addStub(stub:Stub) -> Stub {
     stubs.append(stub)
@@ -89,20 +90,65 @@ public class MockingjayProtocol : NSURLProtocol {
       switch stub.builder(request) {
       case .Failure(let error):
         client?.URLProtocol(self, didFailWithError: error)
-      case .Success(let response, let data):
+      case .Success(let response, let data, let downloadOption):
         client?.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
 
-        if let data = data {
-          client?.URLProtocol(self, didLoadData: data)
+        switch(downloadOption) {
+        case .DownloadAll:
+          if let data = data {
+            client?.URLProtocol(self, didLoadData: data)
+          }
+          client?.URLProtocolDidFinishLoading(self)
+        case .DownloadInChunksOf(bytes: let bytes):
+          download(data, inChunksOfBytes: bytes)
         }
-
-        client?.URLProtocolDidFinishLoading(self)
       }
     } else {
       let error = NSError(domain: NSInternalInconsistencyException, code: 0, userInfo: [ NSLocalizedDescriptionKey: "Handling request without a matching stub." ])
       client?.URLProtocol(self, didFailWithError: error)
     }
   }
-
-  override public func stopLoading() {}
+  
+  override public func stopLoading() {
+    self.enableDownloading = false
+  }
+  
+  // MARK: Private Methods
+  // Simulate streaming of downloads
+  
+  private func download(data:NSData?, inChunksOfBytes bytes:Int) {
+    guard let data = data else {
+      client?.URLProtocolDidFinishLoading(self)
+      return
+    }
+    let operationQueue = NSOperationQueue()
+    operationQueue.maxConcurrentOperationCount = 1
+    
+    operationQueue.addOperationWithBlock { () -> Void in
+      self.download(data, fromOffset: 0, withMaxLength: bytes)
+    }
+  }
+  
+  
+  private func download(data:NSData, fromOffset offset:Int, withMaxLength maxLength:Int) {
+    guard let queue = NSOperationQueue.currentQueue() else {
+      return
+    }
+    guard (offset < data.length) else {
+      client?.URLProtocolDidFinishLoading(self)
+      return
+    }
+    let length = min(data.length - offset, maxLength)
+    
+    queue.addOperationWithBlock { () -> Void in
+      guard self.enableDownloading else {
+        self.enableDownloading = true
+        return
+      }
+      
+      let subdata = data.subdataWithRange(NSMakeRange(offset, length))
+      self.client?.URLProtocol(self, didLoadData: subdata)
+      self.download(data, fromOffset: offset + length, withMaxLength: maxLength)
+    }
+  }
 }
