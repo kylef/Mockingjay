@@ -31,6 +31,7 @@ var stubs = [Stub]()
 public class MockingjayProtocol : NSURLProtocol {
   // MARK: Stubs
   private var enableDownloading = true
+  private let operationQueue = NSOperationQueue()
 
   class func addStub(stub:Stub) -> Stub {
     stubs.append(stub)
@@ -121,6 +122,7 @@ public class MockingjayProtocol : NSURLProtocol {
   
   override public func stopLoading() {
     self.enableDownloading = false
+    self.operationQueue.cancelAllOperations()
   }
   
   // MARK: Private Methods
@@ -130,10 +132,8 @@ public class MockingjayProtocol : NSURLProtocol {
       client?.URLProtocolDidFinishLoading(self)
       return
     }
-    let operationQueue = NSOperationQueue()
-    operationQueue.maxConcurrentOperationCount = 1
-    
-    operationQueue.addOperationWithBlock { () -> Void in
+    self.operationQueue.maxConcurrentOperationCount = 1
+    self.operationQueue.addOperationWithBlock { () -> Void in
       self.download(data, fromOffset: 0, withMaxLength: bytes)
     }
   }
