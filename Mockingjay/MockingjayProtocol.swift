@@ -94,8 +94,10 @@ public class MockingjayProtocol : NSURLProtocol {
         if let range = extractRangeFromHTTPHeaders(request.allHTTPHeaderFields) {
           data = data?.subdataWithRange(range)
           
-          if let data = data {
-            response = NSHTTPURLResponse(URL: response.URL!, MIMEType: response.MIMEType, expectedContentLength: data.length, textEncodingName: response.textEncodingName)
+          if let r = response as? NSHTTPURLResponse, data = data {
+            var header = r.allHeaderFields as! [String:String]
+            header["Content-Length"] = String(data.length)
+            response = NSHTTPURLResponse(URL: r.URL!, statusCode: r.statusCode, HTTPVersion: nil, headerFields: header)!
           }
         }
         
