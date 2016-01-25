@@ -90,7 +90,11 @@ public class MockingjayProtocol : NSURLProtocol {
       switch stub.builder(request) {
       case .Failure(let error):
         client?.URLProtocol(self, didFailWithError: error)
-      case .Success(let response, let data, let downloadOption):
+      case .Success(let response, var data, let downloadOption):
+        if let range = extractRangeFromHTTPHeaders(request.allHTTPHeaderFields) {
+          data = data?.subdataWithRange(range)
+        }
+        
         client?.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
 
         switch(downloadOption) {
@@ -114,7 +118,6 @@ public class MockingjayProtocol : NSURLProtocol {
   }
   
   // MARK: Private Methods
-  // Simulate streaming of downloads
   
   private func download(data:NSData?, inChunksOfBytes bytes:Int) {
     guard let data = data else {
@@ -151,4 +154,17 @@ public class MockingjayProtocol : NSURLProtocol {
       self.download(data, fromOffset: offset + length, withMaxLength: maxLength)
     }
   }
+  
+  private func extractRangeFromHTTPHeaders(headers:[String : String]?) -> NSRange? {
+    guard let rangeStr = headers?["Range"] else {
+      return nil
+    }
+    let range = rangeStr.componentsSeparatedByString("-").map({ (str) -> Int in
+      Int(str)!
+    })
+    let loc = range[0]
+    let length = range[1] - loc
+    return NSMakeRange(loc, length)
+  }
+  
 }

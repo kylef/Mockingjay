@@ -87,6 +87,36 @@ class MockingjayAsyncProtocolTests: XCTestCase, NSURLSessionDataDelegate  {
     XCTAssertEqual(mutableData, data)
   }
   
+  func testByteRanges() {
+    let length = 100000
+    let request = NSMutableURLRequest(URL: NSURL(string: "https://fuller.li/")!)
+    request.addValue("50000-150000", forHTTPHeaderField: "Range")
+    let path = NSBundle(forClass: self.classForCoder).pathForResource("TestAudio", ofType: "m4a")
+    let data = NSData(contentsOfFile: path!)!
+    
+    let stubResponse = NSHTTPURLResponse(URL: request.URL!, statusCode: 200, HTTPVersion: "1.1", headerFields: ["Content-Length" : String(length)])!
+    MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
+      return true
+      }) { (request) -> (Response) in
+        return Response.Success(stubResponse, data, .DownloadInChunksOf(bytes: 2000))
+    }
+    
+    let urlSession = NSURLSession(configuration: configuration, delegate: self, delegateQueue: NSOperationQueue.currentQueue())
+    let dataTask = urlSession.dataTaskWithRequest(request)
+    dataTask.resume()
+    
+    let mutableData = NSMutableData()
+    while(mutableData.length < length) {
+      let expectation = expectationWithDescription("testProtocolCanReturnedDataInChunks")
+      self.didReceiveDataHandler = { (session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) in
+        mutableData.appendData(data)
+        expectation.fulfill()
+      }
+      waitForExpectationsWithTimeout(2.0, handler: nil)
+    }
+    XCTAssertEqual(mutableData, data.subdataWithRange(NSMakeRange(50000, length)))
+  }
+  
   // MARK: NSURLSessionDataDelegate
   func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
     self.didReceiveDataHandler?(session: session, dataTask: dataTask, data:data)
