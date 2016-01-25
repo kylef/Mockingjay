@@ -90,9 +90,13 @@ public class MockingjayProtocol : NSURLProtocol {
       switch stub.builder(request) {
       case .Failure(let error):
         client?.URLProtocol(self, didFailWithError: error)
-      case .Success(let response, var data, let downloadOption):
+      case .Success(var response, var data, let downloadOption):
         if let range = extractRangeFromHTTPHeaders(request.allHTTPHeaderFields) {
           data = data?.subdataWithRange(range)
+          
+          if let data = data {
+            response = NSHTTPURLResponse(URL: response.URL!, MIMEType: response.MIMEType, expectedContentLength: data.length, textEncodingName: response.textEncodingName)
+          }
         }
         
         client?.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
