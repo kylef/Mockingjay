@@ -98,6 +98,7 @@ public class MockingjayProtocol : NSURLProtocol {
           if let r = response as? NSHTTPURLResponse, data = data {
             var header = r.allHeaderFields as! [String:String]
             header["Content-Length"] = String(data.length)
+            header["Content-Range"] = String(range.httpRangeStringWithFullLength(data.length))
             response = NSHTTPURLResponse(URL: r.URL!, statusCode: r.statusCode, HTTPVersion: nil, headerFields: header)!
           }
         }
@@ -174,4 +175,11 @@ public class MockingjayProtocol : NSURLProtocol {
     return NSMakeRange(loc, length)
   }
   
+}
+
+extension NSRange {
+  func httpRangeStringWithFullLength(fullLength:Int) -> String {
+    let endLoc = self.location + self.length - 1
+    return "bytes " + String(self.location) + "-" + String(endLoc) + "/" + String(fullLength)
+  }
 }
