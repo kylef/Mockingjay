@@ -170,7 +170,7 @@ public class MockingjayProtocol : NSURLProtocol {
       Int(str)!
     })
     let loc = range[0]
-    let length = range[1] - loc
+    let length = range[1] - loc + 1
     return NSMakeRange(loc, length)
   }
   

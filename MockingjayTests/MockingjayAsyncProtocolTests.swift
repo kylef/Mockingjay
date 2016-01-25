@@ -90,7 +90,7 @@ class MockingjayAsyncProtocolTests: XCTestCase, NSURLSessionDataDelegate  {
   func testByteRanges() {
     let length = 100000
     let request = NSMutableURLRequest(URL: NSURL(string: "https://fuller.li/")!)
-    request.addValue("bytes=50000-150000", forHTTPHeaderField: "Range")
+    request.addValue("bytes=50000-149999", forHTTPHeaderField: "Range")
     let path = NSBundle(forClass: self.classForCoder).pathForResource("TestAudio", ofType: "m4a")
     let data = NSData(contentsOfFile: path!)!
     
