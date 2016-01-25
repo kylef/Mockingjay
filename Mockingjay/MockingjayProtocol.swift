@@ -159,7 +159,7 @@ public class MockingjayProtocol : NSURLProtocol {
     guard let rangeStr = headers?["Range"] else {
       return nil
     }
-    let range = rangeStr.componentsSeparatedByString("-").map({ (str) -> Int in
+    let range = rangeStr.componentsSeparatedByString("=")[1].componentsSeparatedByString("-").map({ (str) -> Int in
       Int(str)!
     })
     let loc = range[0]
