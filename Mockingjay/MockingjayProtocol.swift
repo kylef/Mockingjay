@@ -155,6 +155,7 @@ public class MockingjayProtocol : NSURLProtocol {
       
       let subdata = data.subdataWithRange(NSMakeRange(offset, length))
       self.client?.URLProtocol(self, didLoadData: subdata)
+      NSThread.sleepForTimeInterval(0.01)
       self.download(data, fromOffset: offset + length, withMaxLength: maxLength)
     }
   }
