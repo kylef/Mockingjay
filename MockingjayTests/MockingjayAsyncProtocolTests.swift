@@ -11,7 +11,7 @@ import XCTest
 import Mockingjay
 
 class MockingjayAsyncProtocolTests: XCTestCase, NSURLSessionDataDelegate  {
-
+  
   typealias DidReceiveDataHandler = (session: NSURLSession, dataTask: NSURLSessionDataTask, data: NSData) -> ()
   var didReceiveDataHandler:DidReceiveDataHandler?
   var configuration:NSURLSessionConfiguration!
@@ -48,7 +48,7 @@ class MockingjayAsyncProtocolTests: XCTestCase, NSURLSessionDataDelegate  {
     dataTask.resume()
     
     let mutableData = NSMutableData()
-    while(mutableData.length < stubData.length) {
+    while mutableData.length < stubData.length {
       let expectation = expectationWithDescription("testProtocolCanReturnedDataInChunks")
       self.didReceiveDataHandler = { (session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) in
         mutableData.appendData(data)
@@ -76,7 +76,7 @@ class MockingjayAsyncProtocolTests: XCTestCase, NSURLSessionDataDelegate  {
     dataTask.resume()
     
     let mutableData = NSMutableData()
-    while(mutableData.length < data.length) {
+    while mutableData.length < data.length {
       let expectation = expectationWithDescription("testProtocolCanReturnedDataInChunks")
       self.didReceiveDataHandler = { (session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) in
         mutableData.appendData(data)
@@ -106,7 +106,7 @@ class MockingjayAsyncProtocolTests: XCTestCase, NSURLSessionDataDelegate  {
     dataTask.resume()
     
     let mutableData = NSMutableData()
-    while(mutableData.length < length) {
+    while mutableData.length < length {
       let expectation = expectationWithDescription("testProtocolCanReturnedDataInChunks")
       self.didReceiveDataHandler = { (session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) in
         mutableData.appendData(data)

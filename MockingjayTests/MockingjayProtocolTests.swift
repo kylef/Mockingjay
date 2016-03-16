@@ -42,7 +42,7 @@ class MockingjayProtocolTests : XCTestCase {
     let request = NSURLRequest(URL: NSURL(string: "https://kylefuller.co.uk/")!)
     let stubError = NSError(domain: "MockingjayTests", code: 0, userInfo: nil)
 
-    MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
+    MockingjayProtocol.addStub({ _ in
       return true
     }) { (request) -> (Response) in
       return Response.Failure(stubError)
@@ -69,7 +69,7 @@ class MockingjayProtocolTests : XCTestCase {
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
     }) { (request) -> (Response) in
-      return Response.Success(stubResponse, .Content(stubData))
+        return Response.Success(stubResponse, .Content(stubData))
     }
 
     var response:NSURLResponse?
