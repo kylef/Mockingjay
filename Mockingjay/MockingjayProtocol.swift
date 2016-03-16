@@ -14,7 +14,7 @@ public struct Stub : Equatable {
   let matcher:Matcher
   let builder:Builder
   let uuid:NSUUID
-
+  
   init(matcher:Matcher, builder:Builder) {
     self.matcher = matcher
     self.builder = builder
@@ -32,36 +32,36 @@ public class MockingjayProtocol : NSURLProtocol {
   // MARK: Stubs
   private var enableDownloading = true
   private let operationQueue = NSOperationQueue()
-
+  
   class func addStub(stub:Stub) -> Stub {
     stubs.append(stub)
-
+    
     var token: dispatch_once_t = 0
     dispatch_once(&token) {
       NSURLProtocol.registerClass(self)
       return
     }
-
+    
     return stub
   }
-
+  
   /// Register a matcher and a builder as a new stub
   public class func addStub(matcher:Matcher, builder:Builder) -> Stub {
     return addStub(Stub(matcher: matcher, builder: builder))
   }
-
+  
   /// Unregister the given stub
   public class func removeStub(stub:Stub) {
     if let index = stubs.indexOf(stub) {
       stubs.removeAtIndex(index)
     }
   }
-
+  
   /// Remove all registered stubs
   public class func removeAllStubs() {
     stubs.removeAll(keepCapacity: false)
   }
-
+  
   /// Finds the appropriate stub for a request
   /// This method searches backwards though the registered requests
   /// to find the last registered stub that handles the request.
@@ -71,49 +71,41 @@ public class MockingjayProtocol : NSURLProtocol {
         return stub
       }
     }
-
+    
     return nil
   }
-
+  
   // MARK: NSURLProtocol
-
+  
   /// Returns whether there is a registered stub handler for the given request.
   override public class func canInitWithRequest(request:NSURLRequest) -> Bool {
     return stubForRequest(request) != nil
   }
-
+  
   override public class func canonicalRequestForRequest(request: NSURLRequest) -> NSURLRequest {
     return request
   }
-
+  
   override public func startLoading() {
     if let stub = MockingjayProtocol.stubForRequest(request) {
       switch stub.builder(request) {
       case .Failure(let error):
         client?.URLProtocol(self, didFailWithError: error)
-      case .Success(var response, var data, let downloadOption):
-        if let range = extractRangeFromHTTPHeaders(request.allHTTPHeaderFields) {
-          let fullLength = data?.length
-          data = data?.subdataWithRange(range)
-          
-          if let r = response as? NSHTTPURLResponse, data = data, fullLength = fullLength {
-            var header = r.allHeaderFields as! [String:String]
-            header["Content-Length"] = String(data.length)
-            header["Content-Range"] = String(range.httpRangeStringWithFullLength(fullLength))
-            response = NSHTTPURLResponse(URL: r.URL!, statusCode: r.statusCode, HTTPVersion: nil, headerFields: header)!
-          }
-        }
+      case .Success(var response, let download):
+        let headers = self.request.allHTTPHeaderFields
         
-        client?.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
-
-        switch(downloadOption) {
-        case .DownloadAll:
-          if let data = data {
-            client?.URLProtocol(self, didLoadData: data)
-          }
+        switch(download) {
+        case .Content(var data):
+          applyRangeFromHTTPHeaders(headers, toData: &data, andUpdateResponse: &response)
+          client?.URLProtocol(self, didLoadData: data)
           client?.URLProtocolDidFinishLoading(self)
-        case .DownloadInChunksOf(bytes: let bytes):
-          download(data, inChunksOfBytes: bytes)
+        case .StreamContent(data: var data, inChunksOf: let bytes):
+          applyRangeFromHTTPHeaders(headers, toData: &data, andUpdateResponse: &response)
+          self.download(data, inChunksOfBytes: bytes)
+          return
+        case .NoContent:
+          client?.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
+          client?.URLProtocolDidFinishLoading(self)
         }
       }
     } else {
@@ -174,6 +166,28 @@ public class MockingjayProtocol : NSURLProtocol {
     let loc = range[0]
     let length = range[1] - loc + 1
     return NSMakeRange(loc, length)
+  }
+  
+  private func applyRangeFromHTTPHeaders(
+    headers:[String : String]?,
+    inout toData data:NSData,
+    inout andUpdateResponse response:NSURLResponse) {
+      guard let range = extractRangeFromHTTPHeaders(headers) else {
+        client?.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
+        return
+      }
+      let fullLength = data.length
+      data = data.subdataWithRange(range)
+      
+      //Attach new headers to response
+      if let r = response as? NSHTTPURLResponse {
+        var header = r.allHeaderFields as! [String:String]
+        header["Content-Length"] = String(data.length)
+        header["Content-Range"] = String(range.httpRangeStringWithFullLength(fullLength))
+        response = NSHTTPURLResponse(URL: r.URL!, statusCode: r.statusCode, HTTPVersion: nil, headerFields: header)!
+      }
+      
+      client?.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
   }
   
 }

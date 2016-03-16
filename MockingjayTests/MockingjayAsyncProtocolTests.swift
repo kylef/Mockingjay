@@ -40,7 +40,7 @@ class MockingjayAsyncProtocolTests: XCTestCase, NSURLSessionDataDelegate  {
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
       }) { (request) -> (Response) in
-        return Response.Success(stubResponse, stubData, .DownloadInChunksOf(bytes: 22))
+        return Response.Success(stubResponse, .StreamContent(data: stubData, inChunksOf: 22))
     }
     
     let urlSession = NSURLSession(configuration: configuration, delegate: self, delegateQueue: NSOperationQueue.currentQueue())
@@ -69,7 +69,7 @@ class MockingjayAsyncProtocolTests: XCTestCase, NSURLSessionDataDelegate  {
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
       }) { (request) -> (Response) in
-        return Response.Success(stubResponse, data, .DownloadInChunksOf(bytes: 2000))
+        return Response.Success(stubResponse, Download.StreamContent(data: data, inChunksOf: 2000))
     }
     let urlSession = NSURLSession(configuration: configuration, delegate: self, delegateQueue: NSOperationQueue.currentQueue())
     let dataTask = urlSession.dataTaskWithRequest(request)
@@ -98,7 +98,7 @@ class MockingjayAsyncProtocolTests: XCTestCase, NSURLSessionDataDelegate  {
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
       }) { (request) -> (Response) in
-        return Response.Success(stubResponse, data, .DownloadInChunksOf(bytes: 2000))
+        return Response.Success(stubResponse, .StreamContent(data: data, inChunksOf: 2000))
     }
     
     let urlSession = NSURLSession(configuration: configuration, delegate: self, delegateQueue: NSOperationQueue.currentQueue())
