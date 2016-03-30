@@ -14,12 +14,12 @@ extension NSURLSessionConfiguration {
   /// Swizzles NSURLSessionConfiguration's default and ephermeral sessions to add Mockingjay
   public class func mockingjaySwizzleDefaultSessionConfiguration() {
     dispatch_once(&mockingjaySessionSwizzleToken) {
-      let defaultSessionConfiguration = class_getClassMethod(self, "defaultSessionConfiguration")
-      let mockingjayDefaultSessionConfiguration = class_getClassMethod(self, "mockingjayDefaultSessionConfiguration")
+      let defaultSessionConfiguration = class_getClassMethod(self, #selector(NSURLSessionConfiguration.defaultSessionConfiguration))
+      let mockingjayDefaultSessionConfiguration = class_getClassMethod(self, #selector(NSURLSessionConfiguration.mockingjayDefaultSessionConfiguration))
       method_exchangeImplementations(defaultSessionConfiguration, mockingjayDefaultSessionConfiguration)
 
-      let ephemeralSessionConfiguration = class_getClassMethod(self, "ephemeralSessionConfiguration")
-      let mockingjayEphemeralSessionConfiguration = class_getClassMethod(self, "mockingjayEphemeralSessionConfiguration")
+      let ephemeralSessionConfiguration = class_getClassMethod(self, #selector(NSURLSessionConfiguration.ephemeralSessionConfiguration))
+      let mockingjayEphemeralSessionConfiguration = class_getClassMethod(self, #selector(NSURLSessionConfiguration.mockingjayEphemeralSessionConfiguration))
       method_exchangeImplementations(ephemeralSessionConfiguration, mockingjayEphemeralSessionConfiguration)
     }
   }
