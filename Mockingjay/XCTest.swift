@@ -49,8 +49,8 @@ extension XCTest {
 
   public class func mockingjaySwizzleTearDown() {
     dispatch_once(&mockingjayTearDownSwizzleToken) {
-      let tearDown = class_getInstanceMethod(self, "tearDown")
-      let mockingjayTearDown = class_getInstanceMethod(self, "mockingjayTearDown")
+      let tearDown = class_getInstanceMethod(self, #selector(XCTest.tearDown))
+      let mockingjayTearDown = class_getInstanceMethod(self, #selector(XCTest.mockingjayTearDown))
       method_exchangeImplementations(tearDown, mockingjayTearDown)
     }
   }
