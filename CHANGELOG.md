@@ -1,5 +1,5 @@
 # Mockingjay Changelog
-## Master
+## 1.2.0 (2016-05-10)
 ### Enhancements
 
 - Swift 2.2 support has been added.
