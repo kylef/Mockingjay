@@ -1,4 +1,10 @@
 # Mockingjay Changelog
+## Master
+
+This release fixes a packaging problem in 1.2.0 where the CocoaPod's podspec
+for Mockingjay did not contain all the sources.
+
+
 ## 1.2.0 (2016-05-10)
 ### Enhancements
 

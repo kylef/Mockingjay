@@ -17,6 +17,7 @@ Pod::Spec.new do |spec|
         'Mockingjay/MockingjayProtocol.swift',
         'Mockingjay/{Matchers,Builders}.swift',
         'Mockingjay/NSURLSessionConfiguration.swift'
+        'Mockingjay/MockingjayURLSessionConfiguration.m'
   end
 
   spec.subspec 'XCTest' do |xctest_spec|
