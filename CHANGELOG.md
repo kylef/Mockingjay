@@ -1,5 +1,9 @@
 # Mockingjay Changelog
 ## Master
+### Enhancements
+
+- Swift 2.2 support has been added.
+
 ### Bug Fixes
 
 - Mockingjay will now add it's own protocol to `NSURLSessionConfiguration`
