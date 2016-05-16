@@ -1,4 +1,31 @@
 # Mockingjay Changelog
+## Master
+### Breaking
+
+- Responses now use a `Download` enum instead of an optional `NSData`. This
+    means you must use the following API:
+
+    ```swift
+    .Success(response, .NoContent)
+    .Success(response, .Content(data))
+    ```
+
+    Previously:
+
+    ```swift
+    .Success(response, nil)
+    .Success(response, data)
+    ```
+
+### Enhancements
+
+- Adds support for streaming stubbed response data.
+
+    ```swift
+    .Success(response, .StreamContent(data, inChunksOf: 1024))
+    ```
+
+
 ## 1.2.1 (2016-05-10)
 
 This release fixes a packaging problem in 1.2.0 where the CocoaPod's podspec

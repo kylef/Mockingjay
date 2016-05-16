@@ -77,8 +77,7 @@ Builders are very similar to a matcher, it takes a request, and it returns eithe
 ```swift
 func builder(request:NSURLRequest) -> Response {
   let response = NSHTTPURLResponse(URL: request.URL, statusCode: 200, HTTPVersion: nil, headerFields: nil)!
-  let data:NSData? = nil
-  return .Success(response, data)
+  return .Success(response, .NoContent)
 }
 
 stub(matcher, builder)
