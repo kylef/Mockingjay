@@ -42,7 +42,7 @@ class MockingjayProtocolTests : XCTestCase {
     let request = NSURLRequest(URL: NSURL(string: "https://kylefuller.co.uk/")!)
     let stubError = NSError(domain: "MockingjayTests", code: 0, userInfo: nil)
 
-    MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
+    MockingjayProtocol.addStub({ _ in
       return true
     }) { (request) -> (Response) in
       return Response.Failure(stubError)
@@ -69,7 +69,7 @@ class MockingjayProtocolTests : XCTestCase {
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
     }) { (request) -> (Response) in
-      return Response.Success(stubResponse, stubData)
+        return Response.Success(stubResponse, .Content(stubData))
     }
 
     var response:NSURLResponse?
@@ -89,13 +89,13 @@ class MockingjayProtocolTests : XCTestCase {
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
     }) { (request) -> (Response) in
-        return Response.Success(stubResponse, stub1Data)
+        return Response.Success(stubResponse, .Content(stub1Data))
     }
 
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
     }) { (request) -> (Response) in
-        return Response.Success(stubResponse, stub2Data)
+        return Response.Success(stubResponse, .Content(stub2Data))
     }
 
     var response:NSURLResponse?
@@ -105,4 +105,5 @@ class MockingjayProtocolTests : XCTestCase {
     XCTAssertEqual(response?.textEncodingName, "utf-8")
     XCTAssertEqual(data, stub2Data)
   }
+  
 }
