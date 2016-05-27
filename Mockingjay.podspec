@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = 'Mockingjay'
-  spec.version = '1.2.1'
+  spec.version = '1.2.2'
   spec.summary = 'An elegant library for stubbing HTTP requests with ease in Swift.'
   spec.homepage = 'https://github.com/kylef/Mockingjay'
   spec.license = { :type => 'BSD', :file => 'LICENSE' }
@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
     core_spec.source_files = 'Mockingjay/Mockingjay.{h,swift}',
         'Mockingjay/MockingjayProtocol.swift',
         'Mockingjay/{Matchers,Builders}.swift',
-        'Mockingjay/NSURLSessionConfiguration.swift'
+        'Mockingjay/NSURLSessionConfiguration.swift',
         'Mockingjay/MockingjayURLSessionConfiguration.m'
   end
 
