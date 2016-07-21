@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Cocode. All rights reserved.
 //
 
+#if os(iOS)
+
 import ObjectiveC
 import XCTest
 
@@ -61,3 +63,4 @@ extension XCTest {
     }
   }
 }
+#endif
