@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Cocode. All rights reserved.
 //
 
-#if os(iOS)
+#if !os(watchOS)
 
 import ObjectiveC
 import XCTest
