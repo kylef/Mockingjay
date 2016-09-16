@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 import Mockingjay
 
-func toString(item:AnyClass) -> String {
+func toString(_ item:AnyClass) -> String {
   return "\(item)"
 }
 
@@ -20,35 +20,35 @@ class MockingjaySessionTests: XCTestCase {
   }
 
   func testEphemeralSessionConfigurationIncludesProtocol() {
-    let configuration = NSURLSessionConfiguration.ephemeralSessionConfiguration()
+    let configuration = URLSessionConfiguration.ephemeral
     let protocolClasses = (configuration.protocolClasses!).map(toString)
     XCTAssertEqual(protocolClasses.first!, "MockingjayProtocol")
   }
 
   func testDefaultSessionConfigurationIncludesProtocol() {
-    let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+    let configuration = URLSessionConfiguration.default
     let protocolClasses = (configuration.protocolClasses!).map(toString)
     XCTAssertEqual(protocolClasses.first!, "MockingjayProtocol")
   }
 
   func testURLSession() {
-    let expectation = expectationWithDescription("MockingjaySessionTests")
+    let expectation = self.expectation(description: "MockingjaySessionTests")
 
     let stubbedError = NSError(domain: "Mockingjay Session Tests", code: 0, userInfo: nil)
-    stub(everything, builder: failure(stubbedError))
+    stub(everything, failure(stubbedError))
 
-    let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-    let session = NSURLSession(configuration: configuration)
+    let configuration = URLSessionConfiguration.default
+    let session = URLSession(configuration: configuration)
 
-    session.dataTaskWithURL(NSURL(string: "https://httpbin.org/")!) { data, response, error in
-      dispatch_async(dispatch_get_main_queue()) {
+    session.dataTask(with: URL(string: "https://httpbin.org/")!, completionHandler: { data, response, error in
+      DispatchQueue.main.async {
         XCTAssertNotNil(error)
-        XCTAssertEqual(error?.domain, "Mockingjay Session Tests")
+        XCTAssertEqual((error as? NSError)?.domain, "Mockingjay Session Tests")
         expectation.fulfill()
       }
-    }.resume()
+    }) .resume()
 
-    waitForExpectationsWithTimeout(5) { error in
+    waitForExpectations(timeout: 5) { error in
       XCTAssertNil(error, "\(error)")
     }
   }

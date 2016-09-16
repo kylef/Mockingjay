@@ -9,7 +9,11 @@
 import ObjectiveC
 import XCTest
 
-var mockingjayTearDownSwizzleToken: dispatch_once_t = 0
+let swizzleTearDown: Void = {
+  let tearDown = class_getInstanceMethod(XCTest.self, #selector(XCTest.tearDown))
+  let mockingjayTearDown = class_getInstanceMethod(XCTest.self, #selector(XCTest.mockingjayTearDown))
+  method_exchangeImplementations(tearDown, mockingjayTearDown)
+}()
 
 var AssociatedMockingjayRemoveStubOnTearDownHandle: UInt8 = 0
 extension XCTest {
@@ -27,15 +31,15 @@ extension XCTest {
     }
   }
 
-  public func stub(matcher:Matcher, builder:Builder) -> Stub {
+  @discardableResult public func stub(_ matcher: @escaping Matcher, _ builder: @escaping Builder) -> Stub {
     if mockingjayRemoveStubOnTearDown {
       XCTest.mockingjaySwizzleTearDown()
     }
 
-    return MockingjayProtocol.addStub(matcher, builder: builder)
+    return MockingjayProtocol.addStub(matcher: matcher, builder: builder)
   }
 
-  public func removeStub(stub:Stub) {
+  public func removeStub(_ stub:Stub) {
     MockingjayProtocol.removeStub(stub)
   }
 
@@ -46,11 +50,7 @@ extension XCTest {
   // MARK: Teardown
 
   public class func mockingjaySwizzleTearDown() {
-    dispatch_once(&mockingjayTearDownSwizzleToken) {
-      let tearDown = class_getInstanceMethod(self, #selector(XCTest.tearDown))
-      let mockingjayTearDown = class_getInstanceMethod(self, #selector(XCTest.mockingjayTearDown))
-      method_exchangeImplementations(tearDown, mockingjayTearDown)
-    }
+    _ = swizzleTearDown
   }
 
   func mockingjayTearDown() {
