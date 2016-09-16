@@ -8,29 +8,29 @@
 
 import Foundation
 
-var mockingjaySessionSwizzleToken: dispatch_once_t = 0
+let swizzleDefaultSessionConfiguration: Void = {
+  let defaultSessionConfiguration = class_getClassMethod(URLSessionConfiguration.self, #selector(getter: URLSessionConfiguration.default))
+  let mockingjayDefaultSessionConfiguration = class_getClassMethod(URLSessionConfiguration.self, #selector(URLSessionConfiguration.mockingjayDefaultSessionConfiguration))
+  method_exchangeImplementations(defaultSessionConfiguration, mockingjayDefaultSessionConfiguration)
 
-extension NSURLSessionConfiguration {
+  let ephemeralSessionConfiguration = class_getClassMethod(URLSessionConfiguration.self, #selector(getter: URLSessionConfiguration.ephemeral))
+  let mockingjayEphemeralSessionConfiguration = class_getClassMethod(URLSessionConfiguration.self, #selector(URLSessionConfiguration.mockingjayEphemeralSessionConfiguration))
+  method_exchangeImplementations(ephemeralSessionConfiguration, mockingjayEphemeralSessionConfiguration)
+}()
+
+extension URLSessionConfiguration {
   /// Swizzles NSURLSessionConfiguration's default and ephermeral sessions to add Mockingjay
   public class func mockingjaySwizzleDefaultSessionConfiguration() {
-    dispatch_once(&mockingjaySessionSwizzleToken) {
-      let defaultSessionConfiguration = class_getClassMethod(self, #selector(NSURLSessionConfiguration.defaultSessionConfiguration))
-      let mockingjayDefaultSessionConfiguration = class_getClassMethod(self, #selector(NSURLSessionConfiguration.mockingjayDefaultSessionConfiguration))
-      method_exchangeImplementations(defaultSessionConfiguration, mockingjayDefaultSessionConfiguration)
-
-      let ephemeralSessionConfiguration = class_getClassMethod(self, #selector(NSURLSessionConfiguration.ephemeralSessionConfiguration))
-      let mockingjayEphemeralSessionConfiguration = class_getClassMethod(self, #selector(NSURLSessionConfiguration.mockingjayEphemeralSessionConfiguration))
-      method_exchangeImplementations(ephemeralSessionConfiguration, mockingjayEphemeralSessionConfiguration)
-    }
+    _ = swizzleDefaultSessionConfiguration
   }
 
-  class func mockingjayDefaultSessionConfiguration() -> NSURLSessionConfiguration {
+  class func mockingjayDefaultSessionConfiguration() -> URLSessionConfiguration {
     let configuration = mockingjayDefaultSessionConfiguration()
     configuration.protocolClasses = [MockingjayProtocol.self] as [AnyClass] + configuration.protocolClasses!
     return configuration
   }
 
-  class func mockingjayEphemeralSessionConfiguration() -> NSURLSessionConfiguration {
+  class func mockingjayEphemeralSessionConfiguration() -> URLSessionConfiguration {
     let configuration = mockingjayEphemeralSessionConfiguration()
     configuration.protocolClasses = [MockingjayProtocol.self] as [AnyClass] + configuration.protocolClasses!
     return configuration

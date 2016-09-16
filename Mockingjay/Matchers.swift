@@ -12,23 +12,23 @@ import URITemplate
 // Collection of generic matchers
 
 /// Mockingjay matcher which returns true for every request
-public func everything(request:NSURLRequest) -> Bool {
+public func everything(_ request: URLRequest) -> Bool {
   return true
 }
 
 /// Mockingjay matcher which matches URIs
-public func uri(uri:String) -> (request:NSURLRequest) -> Bool {
+public func uri(_ uri:String) -> (_ request: URLRequest) -> Bool {
   
-  return { (request:NSURLRequest) in
+  return { (request:URLRequest) in
     let template = URITemplate(template:uri)
     
-    if let URLString = request.URL?.absoluteString {
+    if let URLString = request.url?.absoluteString {
       if template.extract(URLString) != nil {
         return true
       }
     }
     
-    if let path = request.URL?.path {
+    if let path = request.url?.path {
       if template.extract(path) != nil {
         return true
       }
@@ -39,39 +39,39 @@ public func uri(uri:String) -> (request:NSURLRequest) -> Bool {
 }
 
 public enum HTTPMethod : CustomStringConvertible {
-  case GET
-  case POST
-  case PATCH
-  case PUT
-  case DELETE
-  case OPTIONS
-  case HEAD
+  case get
+  case post
+  case patch
+  case put
+  case delete
+  case options
+  case head
 
   public var description : String {
     switch self {
-    case .GET:
+    case .get:
       return "GET"
-    case .POST:
+    case .post:
       return "POST"
-    case .PATCH:
+    case .patch:
       return "PATCH"
-    case .PUT:
+    case .put:
       return "PUT"
-    case .DELETE:
+    case .delete:
       return "DELETE"
-    case .OPTIONS:
+    case .options:
       return "OPTIONS"
-    case .HEAD:
+    case .head:
       return "HEAD"
     }
   }
 }
 
-public func http(method:HTTPMethod, uri:String) -> (request:NSURLRequest) -> Bool {
-  return { (request:NSURLRequest) in
-    if let requestMethod = request.HTTPMethod {
+public func http(_ method: HTTPMethod, uri: String) -> (_ request: URLRequest) -> Bool {
+  return { (request:URLRequest) in
+    if let requestMethod = request.httpMethod {
       if requestMethod == method.description {
-        return Mockingjay.uri(uri)(request: request)
+        return Mockingjay.uri(uri)(request)
       }
     }
     
