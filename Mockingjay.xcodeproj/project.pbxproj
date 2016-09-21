@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2705946B1C4FA7A6002A3AA9 /* MockingjayXCTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2705946A1C4FA7A6002A3AA9 /* MockingjayXCTestTests.swift */; };
+		2715FACF1D8C81AB00A89DF7 /* URITemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2715FAC91D8C818C00A89DF7 /* URITemplate.framework */; };
 		274367921AA27A7C0030C97B /* Mockingjay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367911AA27A7C0030C97B /* Mockingjay.swift */; };
 		274367941AA27AAD0030C97B /* MockingjayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367931AA27AAD0030C97B /* MockingjayProtocol.swift */; };
 		274367961AA27B170030C97B /* MockingjayProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367951AA27B170030C97B /* MockingjayProtocolTests.swift */; };
@@ -22,7 +23,6 @@
 		27703A631CE2560600194732 /* MockingjayURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 27703A621CE2560600194732 /* MockingjayURLSessionConfiguration.m */; };
 		444EA6091C5261DE000C3A9F /* MockingjayAsyncProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444EA6081C5261DE000C3A9F /* MockingjayAsyncProtocolTests.swift */; };
 		444EA60C1C52666D000C3A9F /* TestAudio.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 444EA60B1C52666D000C3A9F /* TestAudio.m4a */; };
-		44B5576C1D92CD7100320355 /* URITemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44B5576B1D92CD7100320355 /* URITemplate.swift */; };
 		A1E3C5701AA4EA130069C998 /* XCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2743679B1AA28D4D0030C97B /* XCTest.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,7 +88,6 @@
 		27703A621CE2560600194732 /* MockingjayURLSessionConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockingjayURLSessionConfiguration.m; sourceTree = "<group>"; };
 		444EA6081C5261DE000C3A9F /* MockingjayAsyncProtocolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockingjayAsyncProtocolTests.swift; sourceTree = "<group>"; };
 		444EA60B1C52666D000C3A9F /* TestAudio.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestAudio.m4a; sourceTree = "<group>"; };
-		44B5576B1D92CD7100320355 /* URITemplate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URITemplate.swift; path = URITemplate/Sources/URITemplate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2715FACF1D8C81AB00A89DF7 /* URITemplate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,7 +125,6 @@
 			isa = PBXGroup;
 			children = (
 				2715FABD1D8C818C00A89DF7 /* URITemplate.xcodeproj */,
-				44B5576B1D92CD7100320355 /* URITemplate.swift */,
 				2746CDDB1A702FC100719B66 /* Configurations */,
 				2746CDC11A702F7800719B66 /* Mockingjay */,
 				2746CDCE1A702F7800719B66 /* MockingjayTests */,
@@ -358,7 +357,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				44B5576C1D92CD7100320355 /* URITemplate.swift in Sources */,
 				274367981AA28AFC0030C97B /* Matchers.swift in Sources */,
 				27703A631CE2560600194732 /* MockingjayURLSessionConfiguration.m in Sources */,
 				274367921AA27A7C0030C97B /* Mockingjay.swift in Sources */,
