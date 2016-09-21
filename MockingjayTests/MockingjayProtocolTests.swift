@@ -12,6 +12,14 @@ import Mockingjay
 
 
 class MockingjayProtocolTests : XCTestCase {
+  
+  var urlSession:URLSession!
+  
+  override func setUp() {
+    super.setUp()
+    urlSession = URLSession(configuration: URLSessionConfiguration.default)
+  }
+  
   override func tearDown() {
     super.tearDown()
     MockingjayProtocol.removeAllStubs()
@@ -49,17 +57,23 @@ class MockingjayProtocolTests : XCTestCase {
     }
 
     var response: URLResponse?
-    var error: NSError?
+    var error:Error?
     var data: Data? = nil
-    do {
-      data = try NSURLConnection.sendSynchronousRequest(request, returning: &response)
-    } catch let error1 as NSError {
-      error = error1
+    
+    let expectation = self.expectation(description: "testProtocolReturnsErrorWithRegisteredStubError")
+    let dataTask = urlSession.dataTask(with: request) { (d, r, e) in
+      response = r
+      data = d
+      error = e
+      expectation.fulfill()
     }
-
+    dataTask.resume()
+    waitForExpectations(timeout: 2.0, handler: nil)
+    
     XCTAssertNil(response)
     XCTAssertNil(data)
-    XCTAssertEqual(error!.domain, "MockingjayTests")  }
+    XCTAssertNotNil(error)
+  }
 
   func testProtocolReturnsResponseWithRegisteredStubError() {
     let request = URLRequest(url: URL(string: "https://kylefuller.co.uk/")!)
@@ -71,13 +85,25 @@ class MockingjayProtocolTests : XCTestCase {
     }) { (request) -> (Response) in
         return Response.success(stubResponse, .content(stubData))
     }
-
+    
     var response:URLResponse?
-    let data = try? NSURLConnection.sendSynchronousRequest(request, returning: &response)
+    var data:Data?
+    var error:Error?
+
+    let expectation = self.expectation(description: "testProtocolReturnsResponseWithRegisteredStubError")
+    let dataTask = urlSession.dataTask(with: request) { (d, r, e) in
+      response = r
+      data = d
+      error = e
+      expectation.fulfill()
+    }
+    dataTask.resume()
+    waitForExpectations(timeout: 2.0, handler: nil)
 
     XCTAssertEqual(response?.url, stubResponse.url!)
     XCTAssertEqual(response?.textEncodingName, "utf-8")
     XCTAssertEqual(data, stubData)
+    XCTAssertNil(error)
   }
 
   func testProtocolReturnsResponseWithLastRegisteredMatchinbgStub() {
@@ -99,11 +125,23 @@ class MockingjayProtocolTests : XCTestCase {
     }
 
     var response:URLResponse?
-    let data = try? NSURLConnection.sendSynchronousRequest(request, returning: &response)
+    var data:Data?
+    var error:Error?
+    
+    let expectation = self.expectation(description: "testProtocolReturnsResponseWithRegisteredStubError")
+    let dataTask = urlSession.dataTask(with: request) { (d, r, e) in
+      response = r
+      data = d
+      error = e
+      expectation.fulfill()
+    }
+    dataTask.resume()
+    waitForExpectations(timeout: 2.0, handler: nil)
 
     XCTAssertEqual(response?.url, stubResponse.url!)
     XCTAssertEqual(response?.textEncodingName, "utf-8")
     XCTAssertEqual(data, stub2Data)
+    XCTAssertNil(error)
   }
   
 }

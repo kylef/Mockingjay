@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import URITemplate
 
 // Collection of generic matchers
 
