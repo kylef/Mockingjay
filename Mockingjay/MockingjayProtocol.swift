@@ -148,7 +148,7 @@ public class MockingjayProtocol: URLProtocol {
         return
       }
       
-      let subdata = data.subdata(in: offset ..< offset)
+      let subdata = data.subdata(in: offset ..< (offset + length))
       self.client?.urlProtocol(self, didLoad: subdata)
       Thread.sleep(forTimeInterval: 0.01)
       self.download(data, fromOffset: offset + length, withMaxLength: maxLength)
@@ -163,7 +163,7 @@ public class MockingjayProtocol: URLProtocol {
       Int(str)!
     })
     let loc = range[0]
-    let length = range[1] - loc + 1
+    let length = range[1] + 1
     return loc ..< length
   }
   

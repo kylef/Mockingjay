@@ -105,8 +105,8 @@ class MockingjayAsyncProtocolTests: XCTestCase, URLSessionDataDelegate  {
     let dataTask = urlSession.dataTask(with: request)
     dataTask.resume()
     
-    let mutableData = NSMutableData()
-    while mutableData.length < length {
+    var mutableData = Data()
+    while mutableData.count < length {
       let expectation = self.expectation(description: "testProtocolCanReturnedDataInChunks")
       self.didReceiveDataHandler = { (session: Foundation.URLSession, dataTask: URLSessionDataTask, data: Data) in
         mutableData.append(data)
@@ -114,7 +114,9 @@ class MockingjayAsyncProtocolTests: XCTestCase, URLSessionDataDelegate  {
       }
       waitForExpectations(timeout: 2.0, handler: nil)
     }
-//    XCTAssertEqual(mutableData, data.subdata(in: NSMakeRange(50000, length)))
+    
+    let correctData = data.subdata(in: 50000 ..< (50000 + length))
+    XCTAssertEqual(mutableData, correctData)
   }
   
   // MARK: NSURLSessionDataDelegate
