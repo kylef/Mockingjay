@@ -148,7 +148,7 @@ public class MockingjayProtocol: URLProtocol {
         return
       }
       
-      let subdata = data.subdata(in: offset ..< offset)
+      let subdata = data.subdata(in: offset ..< (offset + length))
       self.client?.urlProtocol(self, didLoad: subdata)
       Thread.sleep(forTimeInterval: 0.01)
       self.download(data, fromOffset: offset + length, withMaxLength: maxLength)
@@ -163,7 +163,7 @@ public class MockingjayProtocol: URLProtocol {
       Int(str)!
     })
     let loc = range[0]
-    let length = range[1] - loc + 1
+    let length = range[1] + 1
     return loc ..< length
   }
   
@@ -175,13 +175,15 @@ public class MockingjayProtocol: URLProtocol {
         client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
         return
       }
+    
+      let fullLength = data.count
       data = data.subdata(in: range)
       
       //Attach new headers to response
       if let r = response as? HTTPURLResponse {
         var header = r.allHeaderFields as! [String:String]
         header["Content-Length"] = String(data.count)
-        header["Content-Range"] = "bytes \(range.lowerBound)-\(range.upperBound)/\(range.lowerBound + range.upperBound)"
+        header["Content-Range"] = "bytes \(range.lowerBound)-\(range.upperBound)/\(fullLength)"
         response = HTTPURLResponse(url: r.url!, statusCode: r.statusCode, httpVersion: nil, headerFields: header)!
       }
       
