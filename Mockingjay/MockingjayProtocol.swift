@@ -175,13 +175,15 @@ public class MockingjayProtocol: URLProtocol {
         client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
         return
       }
+    
+      let fullLength = data.count
       data = data.subdata(in: range)
       
       //Attach new headers to response
       if let r = response as? HTTPURLResponse {
         var header = r.allHeaderFields as! [String:String]
         header["Content-Length"] = String(data.count)
-        header["Content-Range"] = "bytes \(range.lowerBound)-\(range.upperBound)/\(range.lowerBound + range.upperBound)"
+        header["Content-Range"] = "bytes \(range.lowerBound)-\(range.upperBound)/\(fullLength)"
         response = HTTPURLResponse(url: r.url!, statusCode: r.statusCode, httpVersion: nil, headerFields: header)!
       }
       
