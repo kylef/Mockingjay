@@ -35,7 +35,7 @@ public func ==(lhs:Download, rhs:Download) -> Bool {
 }
 
 public enum Response : Equatable {
-  case Success(NSURLResponse, NSData?)
+  case Success(NSURLResponse, Download)
   case Failure(NSError)
 }
 

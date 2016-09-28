@@ -91,14 +91,22 @@ public class MockingjayProtocol : NSURLProtocol {
       switch stub.builder(request) {
       case .Failure(let error):
         client?.URLProtocol(self, didFailWithError: error)
-      case .Success(let response, let data):
-        client?.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
-
-        if let data = data {
+      case .Success(var response, let download):
+        let headers = self.request.allHTTPHeaderFields
+        
+        switch(download) {
+        case .Content(var data):
+          applyRangeFromHTTPHeaders(headers, toData: &data, andUpdateResponse: &response)
           client?.URLProtocol(self, didLoadData: data)
+          client?.URLProtocolDidFinishLoading(self)
+        case .StreamContent(data: var data, inChunksOf: let bytes):
+          applyRangeFromHTTPHeaders(headers, toData: &data, andUpdateResponse: &response)
+          self.download(data, inChunksOfBytes: bytes)
+          return
+        case .NoContent:
+          client?.URLProtocol(self, didReceiveResponse: response, cacheStoragePolicy: .NotAllowed)
+          client?.URLProtocolDidFinishLoading(self)
         }
-
-        client?.URLProtocolDidFinishLoading(self)
       }
     } else {
       let error = NSError(domain: NSInternalInconsistencyException, code: 0, userInfo: [ NSLocalizedDescriptionKey: "Handling request without a matching stub." ])
