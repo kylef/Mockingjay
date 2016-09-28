@@ -26,6 +26,10 @@
     .Success(response, .StreamContent(data, inChunksOf: 1024))
     ```
 
+## 1.3.0 (2016-09-28)
+
+This release adds support for Swift 2.3.
+
 
 ## 1.2.1 (2016-05-10)
 
