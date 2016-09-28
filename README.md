@@ -18,7 +18,7 @@ Mockingjay has full integration to XCTest and you simply just need to register a
 
 ```swift
 let body = [ "user": "Kyle" ]
-stub(uri("/{user}/{repository}"), json(body))
+stub(uri("/{user}/{repository}"), builder: json(body))
 ```
 
 The `uri` function takes a URL or path which can have a [URI Template](https://github.com/kylef/URITemplate.swift). Such as the following:
@@ -32,23 +32,21 @@ The `uri` function takes a URL or path which can have a [URI Template](https://g
 
 ```swift
 let body = [ "description": "Kyle" ]
-stub(http(.PUT, "/kylef/Mockingjay"), json(body))
+stub(http(.PUT, uri: "/kylef/Mockingjay"), builder: json(body))
 ```
 
 #### Stubbing everything request to result in an error
 
 ```swift
-let error = NSError()
-stub(everything, failure(error))
+let error = NSError(domain: "Mockingjay Session Tests", code: 0, userInfo: nil)
+stub(everything, builder: failure(error))
 ```
 
 #### Stub with a specific HTTP response
 
 ```swift
-stub(everything, http(status: 404))
+stub(everything, builder: http(404, headers: nil, data: nil))
 ```
-
-*Note, the `http` builder can take a set of headers and a body too.*
 
 ## Stub
 
@@ -67,7 +65,7 @@ func matcher(request:NSURLRequest) -> Bool {
   return true  // Let's match this request
 }
 
-stub(matcher, failure(error))
+stub(matcher, builder: failure(error))
 ```
 
 ### Builders
@@ -80,7 +78,7 @@ func builder(request:NSURLRequest) -> Response {
   return .Success(response, .NoContent)
 }
 
-stub(matcher, builder)
+stub(matcher, builder: builder)
 ```
 
 ### Generics
