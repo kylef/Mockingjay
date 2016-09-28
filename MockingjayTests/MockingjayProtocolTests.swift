@@ -69,7 +69,7 @@ class MockingjayProtocolTests : XCTestCase {
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
     }) { (request) -> (Response) in
-        return Response.Success(stubResponse, .Content(stubData))
+        return Response.Success(stubResponse, stubData)
     }
 
     var response:NSURLResponse?
@@ -89,13 +89,13 @@ class MockingjayProtocolTests : XCTestCase {
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
     }) { (request) -> (Response) in
-        return Response.Success(stubResponse, .Content(stub1Data))
+        return Response.Success(stubResponse, stub1Data)
     }
 
     MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
       return true
     }) { (request) -> (Response) in
-        return Response.Success(stubResponse, .Content(stub2Data))
+        return Response.Success(stubResponse, stub2Data)
     }
 
     var response:NSURLResponse?
