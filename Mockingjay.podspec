@@ -12,12 +12,12 @@ Pod::Spec.new do |spec|
   spec.requires_arc = true
 
   spec.subspec 'Core' do |core_spec|
-    core_spec.dependency 'URITemplate', '~> 1.3'
+    core_spec.dependency 'URITemplate', '~> 2.0'
     core_spec.source_files = 'Mockingjay/Mockingjay.{h,swift}',
-        'Mockingjay/MockingjayProtocol.swift',
-        'Mockingjay/{Matchers,Builders}.swift',
-        'Mockingjay/NSURLSessionConfiguration.swift'
-        'Mockingjay/MockingjayURLSessionConfiguration.m'
+                             'Mockingjay/MockingjayProtocol.swift',
+                             'Mockingjay/{Matchers,Builders}.swift',
+                             'Mockingjay/NSURLSessionConfiguration.swift',
+                             'Mockingjay/MockingjayURLSessionConfiguration.m'
   end
 
   spec.subspec 'XCTest' do |xctest_spec|
@@ -27,4 +27,3 @@ Pod::Spec.new do |spec|
     xctest_spec.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
   end
 end
-
