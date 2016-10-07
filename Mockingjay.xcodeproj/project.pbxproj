@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		2705946B1C4FA7A6002A3AA9 /* MockingjayXCTestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2705946A1C4FA7A6002A3AA9 /* MockingjayXCTestTests.swift */; };
+		2715FACF1D8C81AB00A89DF7 /* URITemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2715FAC91D8C818C00A89DF7 /* URITemplate.framework */; };
 		274367921AA27A7C0030C97B /* Mockingjay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367911AA27A7C0030C97B /* Mockingjay.swift */; };
 		274367941AA27AAD0030C97B /* MockingjayProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367931AA27AAD0030C97B /* MockingjayProtocol.swift */; };
 		274367961AA27B170030C97B /* MockingjayProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367951AA27B170030C97B /* MockingjayProtocolTests.swift */; };
 		274367981AA28AFC0030C97B /* Matchers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367971AA28AFC0030C97B /* Matchers.swift */; };
 		2743679A1AA28B0D0030C97B /* MatcherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367991AA28B0D0030C97B /* MatcherTests.swift */; };
-		274367AE1AA29AED0030C97B /* URITemplate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 274367A91AA29ADA0030C97B /* URITemplate.framework */; };
 		274367B01AA29E510030C97B /* Builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367AF1AA29E510030C97B /* Builders.swift */; };
 		274367B21AA29E620030C97B /* BuildersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367B11AA29E620030C97B /* BuildersTests.swift */; };
 		274367C61AA35FD00030C97B /* NSURLSessionConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274367C51AA35FD00030C97B /* NSURLSessionConfiguration.swift */; };
@@ -27,26 +27,33 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		274367A81AA29ADA0030C97B /* PBXContainerItemProxy */ = {
+		2715FAC41D8C818C00A89DF7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 274367A31AA29ADA0030C97B /* URITemplate.xcodeproj */;
+			containerPortal = 2715FABD1D8C818C00A89DF7 /* URITemplate.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 77356D801A253325002822CF;
+			remoteGlobalIDString = "_____Product_Spectre";
+			remoteInfo = Spectre;
+		};
+		2715FAC61D8C818C00A89DF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2715FABD1D8C818C00A89DF7 /* URITemplate.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "_____Product_PathKit";
+			remoteInfo = PathKit;
+		};
+		2715FAC81D8C818C00A89DF7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2715FABD1D8C818C00A89DF7 /* URITemplate.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = "_____Product_URITemplate";
 			remoteInfo = URITemplate;
 		};
-		274367AA1AA29ADA0030C97B /* PBXContainerItemProxy */ = {
+		2715FACA1D8C818C00A89DF7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 274367A31AA29ADA0030C97B /* URITemplate.xcodeproj */;
+			containerPortal = 2715FABD1D8C818C00A89DF7 /* URITemplate.xcodeproj */;
 			proxyType = 2;
-			remoteGlobalIDString = 77356D8B1A253325002822CF;
+			remoteGlobalIDString = "_____Product_URITemplateTests";
 			remoteInfo = URITemplateTests;
-		};
-		274367AC1AA29AE70030C97B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 274367A31AA29ADA0030C97B /* URITemplate.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 77356D7F1A253325002822CF;
-			remoteInfo = URITemplate;
 		};
 		2746CDCC1A702F7800719B66 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -59,13 +66,13 @@
 
 /* Begin PBXFileReference section */
 		2705946A1C4FA7A6002A3AA9 /* MockingjayXCTestTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockingjayXCTestTests.swift; sourceTree = "<group>"; };
+		2715FABD1D8C818C00A89DF7 /* URITemplate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = URITemplate.xcodeproj; path = URITemplate/URITemplate.xcodeproj; sourceTree = "<group>"; };
 		274367911AA27A7C0030C97B /* Mockingjay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mockingjay.swift; sourceTree = "<group>"; };
 		274367931AA27AAD0030C97B /* MockingjayProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockingjayProtocol.swift; sourceTree = "<group>"; };
 		274367951AA27B170030C97B /* MockingjayProtocolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockingjayProtocolTests.swift; sourceTree = "<group>"; };
 		274367971AA28AFC0030C97B /* Matchers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Matchers.swift; sourceTree = "<group>"; };
 		274367991AA28B0D0030C97B /* MatcherTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatcherTests.swift; sourceTree = "<group>"; };
 		2743679B1AA28D4D0030C97B /* XCTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTest.swift; sourceTree = "<group>"; };
-		274367A31AA29ADA0030C97B /* URITemplate.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = URITemplate.xcodeproj; path = URITemplate/URITemplate.xcodeproj; sourceTree = "<group>"; };
 		274367AF1AA29E510030C97B /* Builders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Builders.swift; sourceTree = "<group>"; };
 		274367B11AA29E620030C97B /* BuildersTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildersTests.swift; sourceTree = "<group>"; };
 		274367C51AA35FD00030C97B /* NSURLSessionConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLSessionConfiguration.swift; sourceTree = "<group>"; };
@@ -88,7 +95,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				274367AE1AA29AED0030C97B /* URITemplate.framework in Frameworks */,
+				2715FACF1D8C81AB00A89DF7 /* URITemplate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,11 +110,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		274367A41AA29ADA0030C97B /* Products */ = {
+		2715FABE1D8C818C00A89DF7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				274367A91AA29ADA0030C97B /* URITemplate.framework */,
-				274367AB1AA29ADA0030C97B /* URITemplateTests.xctest */,
+				2715FAC51D8C818C00A89DF7 /* Spectre.framework */,
+				2715FAC71D8C818C00A89DF7 /* PathKit.framework */,
+				2715FAC91D8C818C00A89DF7 /* URITemplate.framework */,
+				2715FACB1D8C818C00A89DF7 /* URITemplateTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -115,7 +124,7 @@
 		2746CDB51A702F7800719B66 = {
 			isa = PBXGroup;
 			children = (
-				274367A31AA29ADA0030C97B /* URITemplate.xcodeproj */,
+				2715FABD1D8C818C00A89DF7 /* URITemplate.xcodeproj */,
 				2746CDDB1A702FC100719B66 /* Configurations */,
 				2746CDC11A702F7800719B66 /* Mockingjay */,
 				2746CDCE1A702F7800719B66 /* MockingjayTests */,
@@ -225,7 +234,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				274367AD1AA29AE70030C97B /* PBXTargetDependency */,
 			);
 			name = Mockingjay;
 			productName = Mockingjay;
@@ -258,7 +266,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = Cocode;
 				TargetAttributes = {
 					2746CDBE1A702F7800719B66 = {
@@ -283,8 +291,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 274367A41AA29ADA0030C97B /* Products */;
-					ProjectRef = 274367A31AA29ADA0030C97B /* URITemplate.xcodeproj */;
+					ProductGroup = 2715FABE1D8C818C00A89DF7 /* Products */;
+					ProjectRef = 2715FABD1D8C818C00A89DF7 /* URITemplate.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -296,18 +304,32 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		274367A91AA29ADA0030C97B /* URITemplate.framework */ = {
+		2715FAC51D8C818C00A89DF7 /* Spectre.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Spectre.framework;
+			remoteRef = 2715FAC41D8C818C00A89DF7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2715FAC71D8C818C00A89DF7 /* PathKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = PathKit.framework;
+			remoteRef = 2715FAC61D8C818C00A89DF7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		2715FAC91D8C818C00A89DF7 /* URITemplate.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = URITemplate.framework;
-			remoteRef = 274367A81AA29ADA0030C97B /* PBXContainerItemProxy */;
+			remoteRef = 2715FAC81D8C818C00A89DF7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		274367AB1AA29ADA0030C97B /* URITemplateTests.xctest */ = {
+		2715FACB1D8C818C00A89DF7 /* URITemplateTests.xctest */ = {
 			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
+			fileType = file;
 			path = URITemplateTests.xctest;
-			remoteRef = 274367AA1AA29ADA0030C97B /* PBXContainerItemProxy */;
+			remoteRef = 2715FACA1D8C818C00A89DF7 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -361,11 +383,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		274367AD1AA29AE70030C97B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = URITemplate;
-			targetProxy = 274367AC1AA29AE70030C97B /* PBXContainerItemProxy */;
-		};
 		2746CDCD1A702F7800719B66 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2746CDBE1A702F7800719B66 /* Mockingjay */;
@@ -387,8 +404,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
@@ -397,6 +416,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -409,7 +429,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -433,8 +453,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = YES;
@@ -443,16 +465,18 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -482,6 +506,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
@@ -509,6 +534,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocode.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
@@ -526,6 +552,7 @@
 				INFOPLIST_FILE = MockingjayTests/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocode.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -538,6 +565,7 @@
 				INFOPLIST_FILE = MockingjayTests/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocode.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

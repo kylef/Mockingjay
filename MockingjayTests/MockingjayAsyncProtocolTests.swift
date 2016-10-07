@@ -10,18 +10,18 @@ import Foundation
 import XCTest
 import Mockingjay
 
-class MockingjayAsyncProtocolTests: XCTestCase, NSURLSessionDataDelegate  {
+class MockingjayAsyncProtocolTests: XCTestCase, URLSessionDataDelegate  {
   
-  typealias DidReceiveDataHandler = (session: NSURLSession, dataTask: NSURLSessionDataTask, data: NSData) -> ()
+  typealias DidReceiveDataHandler = (_ session: Foundation.URLSession, _ dataTask: URLSessionDataTask, _ data: Data) -> ()
   var didReceiveDataHandler:DidReceiveDataHandler?
-  var configuration:NSURLSessionConfiguration!
+  var configuration:URLSessionConfiguration!
   
   override func setUp() {
     super.setUp()
     var protocolClasses = [AnyClass]()
-    protocolClasses.append(MockingjayProtocol)
+    protocolClasses.append(MockingjayProtocol.self)
     
-    configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
+    configuration = URLSessionConfiguration.default
     configuration.protocolClasses = protocolClasses
   }
   
@@ -33,93 +33,95 @@ class MockingjayAsyncProtocolTests: XCTestCase, NSURLSessionDataDelegate  {
   // MARK: Tests
   
   func testDownloadOfTextInChunks() {
-    let request = NSURLRequest(URL: NSURL(string: "https://fuller.li/")!)
-    let stubResponse = NSURLResponse(URL: request.URL!, MIMEType: "text/plain", expectedContentLength: 6, textEncodingName: "utf-8")
-    let stubData = "Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!
+    let request = URLRequest(url: URL(string: "https://fuller.li/")!)
+    let stubResponse = URLResponse(url: request.url!, mimeType: "text/plain", expectedContentLength: 6, textEncodingName: "utf-8")
+    let stubData = "Two things are infinite: the universe and human stupidity; and I'm not sure about the universe.".data(using: String.Encoding.utf8, allowLossyConversion: true)!
     
-    MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
+    MockingjayProtocol.addStub(matcher: { (requestedRequest) -> (Bool) in
       return true
-      }) { (request) -> (Response) in
-        return Response.Success(stubResponse, .StreamContent(data: stubData, inChunksOf: 22))
+    }) { (request) -> (Response) in
+      return Response.success(stubResponse, .streamContent(data: stubData, inChunksOf: 22))
     }
     
-    let urlSession = NSURLSession(configuration: configuration, delegate: self, delegateQueue: NSOperationQueue.currentQueue())
-    let dataTask = urlSession.dataTaskWithRequest(request)
+    let urlSession = Foundation.URLSession(configuration: configuration, delegate: self, delegateQueue: OperationQueue.current)
+    let dataTask = urlSession.dataTask(with: request)
     dataTask.resume()
     
     let mutableData = NSMutableData()
-    while mutableData.length < stubData.length {
-      let expectation = expectationWithDescription("testProtocolCanReturnedDataInChunks")
-      self.didReceiveDataHandler = { (session: NSURLSession, dataTask: NSURLSessionDataTask, data: NSData) in
-        mutableData.appendData(data)
+    while mutableData.length < stubData.count {
+      let expectation = self.expectation(description: "testProtocolCanReturnedDataInChunks")
+      self.didReceiveDataHandler = { (session: Foundation.URLSession, dataTask: URLSessionDataTask, data: Data) in
+        mutableData.append(data)
         expectation.fulfill()
       }
-      waitForExpectationsWithTimeout(2.0, handler: nil)
+      waitForExpectations(timeout: 2.0, handler: nil)
     }
-    XCTAssertEqual(mutableData, stubData)
+    XCTAssertEqual(mutableData as Data, stubData)
   }
   
   func testDownloadOfAudioFileInChunks() {
-    let request = NSURLRequest(URL: NSURL(string: "https://fuller.li/")!)
-    let path = NSBundle(forClass: self.classForCoder).pathForResource("TestAudio", ofType: "m4a")
-    let data = NSData(contentsOfFile: path!)!
+    let request = URLRequest(url: URL(string: "https://fuller.li/")!)
+    let path = Bundle(for: self.classForCoder).path(forResource: "TestAudio", ofType: "m4a")
+    let data = try! Data(contentsOf: URL(fileURLWithPath: path!))
     
-    let stubResponse = NSHTTPURLResponse(URL: request.URL!, statusCode: 200, HTTPVersion: "1.1", headerFields: ["Content-Length" : String(data.length)])!
+    let stubResponse = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: "1.1", headerFields: ["Content-Length" : String(data.count)])!
     
-    MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
+    MockingjayProtocol.addStub(matcher: { (requestedRequest) -> (Bool) in
       return true
-      }) { (request) -> (Response) in
-        return Response.Success(stubResponse, Download.StreamContent(data: data, inChunksOf: 2000))
+    }) { (request) -> (Response) in
+      return Response.success(stubResponse, Download.streamContent(data: data, inChunksOf: 2000))
     }
-    let urlSession = NSURLSession(configuration: configuration, delegate: self, delegateQueue: NSOperationQueue.currentQueue())
-    let dataTask = urlSession.dataTaskWithRequest(request)
+    let urlSession = Foundation.URLSession(configuration: configuration, delegate: self, delegateQueue: OperationQueue.current)
+    let dataTask = urlSession.dataTask(with: request)
     dataTask.resume()
     
     let mutableData = NSMutableData()
-    while mutableData.length < data.length {
-      let expectation = expectationWithDescription("testProtocolCanReturnedDataInChunks")
-      self.didReceiveDataHandler = { (session: NSURLSession, dataTask: NSURLSessionDataTask, data: NSData) in
-        mutableData.appendData(data)
+    while mutableData.length < data.count {
+      let expectation = self.expectation(description: "testProtocolCanReturnedDataInChunks")
+      self.didReceiveDataHandler = { (session: Foundation.URLSession, dataTask: URLSessionDataTask, data: Data) in
+        mutableData.append(data)
         expectation.fulfill()
       }
-      waitForExpectationsWithTimeout(2.0, handler: nil)
+      waitForExpectations(timeout: 2.0, handler: nil)
     }
-    XCTAssertEqual(mutableData, data)
+    XCTAssertEqual(mutableData as Data, data)
   }
   
   func testByteRanges() {
     let length = 100000
-    let request = NSMutableURLRequest(URL: NSURL(string: "https://fuller.li/")!)
+    var request = URLRequest(url: URL(string: "https://fuller.li/")!)
     request.addValue("bytes=50000-149999", forHTTPHeaderField: "Range")
-    let path = NSBundle(forClass: self.classForCoder).pathForResource("TestAudio", ofType: "m4a")
-    let data = NSData(contentsOfFile: path!)!
+    let path = Bundle(for: self.classForCoder).path(forResource: "TestAudio", ofType: "m4a")
+    let data = try! Data(contentsOf: URL(fileURLWithPath: path!))
     
-    let stubResponse = NSHTTPURLResponse(URL: request.URL!, statusCode: 200, HTTPVersion: "1.1", headerFields: ["Content-Length" : String(length)])!
-    MockingjayProtocol.addStub({ (requestedRequest) -> (Bool) in
+    let stubResponse = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: "1.1", headerFields: ["Content-Length" : String(length)])!
+    MockingjayProtocol.addStub(matcher: { (requestedRequest) -> (Bool) in
       return true
-      }) { (request) -> (Response) in
-        return Response.Success(stubResponse, .StreamContent(data: data, inChunksOf: 2000))
+    }) { (request) -> (Response) in
+      return Response.success(stubResponse, .streamContent(data: data, inChunksOf: 2000))
     }
     
-    let urlSession = NSURLSession(configuration: configuration, delegate: self, delegateQueue: NSOperationQueue.currentQueue())
-    let dataTask = urlSession.dataTaskWithRequest(request)
+    let urlSession = Foundation.URLSession(configuration: configuration, delegate: self, delegateQueue: OperationQueue.current)
+    let dataTask = urlSession.dataTask(with: request)
     dataTask.resume()
     
-    let mutableData = NSMutableData()
-    while mutableData.length < length {
-      let expectation = expectationWithDescription("testProtocolCanReturnedDataInChunks")
-      self.didReceiveDataHandler = { (session: NSURLSession, dataTask: NSURLSessionDataTask, data: NSData) in
-        mutableData.appendData(data)
+    var mutableData = Data()
+    while mutableData.count < length {
+      let expectation = self.expectation(description: "testProtocolCanReturnedDataInChunks")
+      self.didReceiveDataHandler = { (session: Foundation.URLSession, dataTask: URLSessionDataTask, data: Data) in
+        mutableData.append(data)
         expectation.fulfill()
       }
-      waitForExpectationsWithTimeout(2.0, handler: nil)
+      waitForExpectations(timeout: 2.0, handler: nil)
     }
-    XCTAssertEqual(mutableData, data.subdataWithRange(NSMakeRange(50000, length)))
+    
+    let correctData = data.subdata(in: 50000 ..< (50000 + length))
+    XCTAssertEqual(mutableData, correctData)
   }
   
   // MARK: NSURLSessionDataDelegate
-  func URLSession(session: NSURLSession, dataTask: NSURLSessionDataTask, didReceiveData data: NSData) {
-    self.didReceiveDataHandler?(session: session, dataTask: dataTask, data:data)
+  func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
+    self.didReceiveDataHandler?(session, dataTask, data)
   }
   
 }
