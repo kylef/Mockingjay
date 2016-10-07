@@ -26,6 +26,11 @@
     .Success(response, .StreamContent(data, inChunksOf: 1024))
     ```
 
+## 1.3.1 (2016-10-07)
+
+This release fixes a packaging problem in 1.3.0 where the CocoaPod's podspec
+for Mockingjay did not contain all the sources.
+
 ## 1.3.0 (2016-09-28)
 
 This release adds support for Swift 2.3.
