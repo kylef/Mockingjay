@@ -1,5 +1,7 @@
 # Mockingjay Changelog
-## Master
+
+## 2.0.0 (2016-10-07)
+
 ### Breaking
 
 - Responses now use a `Download` enum instead of an optional `NSData`. This
