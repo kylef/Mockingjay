@@ -63,7 +63,7 @@ public func file(_ file: String, _ type: String = "json", status: Int = 200, hea
         let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
         if let path = Bundle.main.path(forResource: file, ofType: type) {
             if let data = NSData(contentsOfFile: path) {
-                return content(String(data: data as Data, encoding: .utf8), status: status, headers: headers)(request)
+                return content(String(data: data as Data, encoding: .utf8) ?? "", status: status, headers: headers)(request)
             }
         }
         return .failure(NSError())
