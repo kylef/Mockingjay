@@ -91,7 +91,7 @@ public class MockingjayProtocol: URLProtocol {
     if let stub = MockingjayProtocol.stubForRequest(request) {
       let response = stub.builder(request)
       if let delay = stub.delay {
-        Timer.scheduledTimer(withTimeInterval: delay, repeats: false) { _ in
+        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + delay) {
           self.utilize(response)
         }
       } else {
