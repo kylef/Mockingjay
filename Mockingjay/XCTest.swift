@@ -31,12 +31,12 @@ extension XCTest {
     }
   }
 
-  @discardableResult public func stub(_ matcher: @escaping Matcher, _ builder: @escaping Builder) -> Stub {
+  @discardableResult public func stub(_ matcher: @escaping Matcher, delay: TimeInterval? = nil, _ builder: @escaping Builder) -> Stub {
     if mockingjayRemoveStubOnTearDown {
       XCTest.mockingjaySwizzleTearDown()
     }
 
-    return MockingjayProtocol.addStub(matcher: matcher, builder: builder)
+    return MockingjayProtocol.addStub(matcher: matcher, delay: delay, builder: builder)
   }
 
   public func removeStub(_ stub:Stub) {
