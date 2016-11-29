@@ -106,7 +106,7 @@ class MockingjayProtocolTests : XCTestCase {
     XCTAssertNil(error)
   }
 
-  func testProtocolReturnsResponseWithLastRegisteredMatchinbgStub() {
+  func testProtocolReturnsResponseWithLastRegisteredMatchingStub() {
     let request = URLRequest(url: URL(string: "https://fuller.li/")!)
     let stubResponse = URLResponse(url: request.url!, mimeType: "text/plain", expectedContentLength: 6, textEncodingName: "utf-8")
     let stub1Data = "Stub 1".data(using: String.Encoding.utf8, allowLossyConversion: true)!
@@ -142,6 +142,28 @@ class MockingjayProtocolTests : XCTestCase {
     XCTAssertEqual(response?.textEncodingName, "utf-8")
     XCTAssertEqual(data, stub2Data)
     XCTAssertNil(error)
+  }
+  
+  func testDelay() {
+    let request = URLRequest(url: URL(string: "https://kylefuller.co.uk/")!)
+    
+    MockingjayProtocol.addStub(matcher: { (requestedRequest) -> (Bool) in
+      return true
+    }, delay: 1) { (request) -> (Response) in
+      let response = URLResponse(url: request.url!, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
+      return Response.success(response, .noContent)
+    }
+    
+    let expectation = self.expectation(description: "testDelay")
+    let dataTask = urlSession.dataTask(with: request) { _ in
+      expectation.fulfill()
+    }
+    
+    let startDate = Date()
+    dataTask.resume()
+    waitForExpectations(timeout: 2.0, handler: nil)
+    
+    XCTAssert(startDate.addingTimeInterval(0.95).compare(Date()) == .orderedAscending)
   }
   
 }

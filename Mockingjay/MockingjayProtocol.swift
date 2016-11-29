@@ -12,11 +12,13 @@ import Foundation
 /// Structure representing a registered stub
 public struct Stub : Equatable {
   let matcher:Matcher
+  let delay: TimeInterval?
   let builder:Builder
   let uuid:UUID
   
-  init(matcher:@escaping Matcher, builder:@escaping Builder) {
+  init(matcher:@escaping Matcher, delay: TimeInterval?, builder:@escaping Builder) {
     self.matcher = matcher
+    self.delay = delay
     self.builder = builder
     uuid = UUID()
   }
@@ -45,8 +47,8 @@ public class MockingjayProtocol: URLProtocol {
   }
   
   /// Register a matcher and a builder as a new stub
-  @discardableResult open class func addStub(matcher: @escaping Matcher, builder: @escaping Builder) -> Stub {
-    return addStub(Stub(matcher: matcher, builder: builder))
+  @discardableResult open class func addStub(matcher: @escaping Matcher, delay: TimeInterval? = nil, builder: @escaping Builder) -> Stub {
+    return addStub(Stub(matcher: matcher, delay: delay, builder: builder))
   }
   
   /// Unregister the given stub
@@ -87,25 +89,13 @@ public class MockingjayProtocol: URLProtocol {
   
   override open func startLoading() {
     if let stub = MockingjayProtocol.stubForRequest(request) {
-      switch stub.builder(request) {
-      case .failure(let error):
-        client?.urlProtocol(self, didFailWithError: error)
-      case .success(var response, let download):
-        let headers = self.request.allHTTPHeaderFields
-        
-        switch(download) {
-        case .content(var data):
-          applyRangeFromHTTPHeaders(headers, toData: &data, andUpdateResponse: &response)
-          client?.urlProtocol(self, didLoad: data)
-          client?.urlProtocolDidFinishLoading(self)
-        case .streamContent(data: var data, inChunksOf: let bytes):
-          applyRangeFromHTTPHeaders(headers, toData: &data, andUpdateResponse: &response)
-          self.download(data, inChunksOfBytes: bytes)
-          return
-        case .noContent:
-          client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
-          client?.urlProtocolDidFinishLoading(self)
+      let response = stub.builder(request)
+      if let delay = stub.delay {
+        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + delay) {
+          self.sendResponse(response)
         }
+      } else {
+        sendResponse(response)
       }
     } else {
       let error = NSError(domain: NSExceptionName.internalInconsistencyException.rawValue, code: 0, userInfo: [ NSLocalizedDescriptionKey: "Handling request without a matching stub." ])
@@ -119,6 +109,29 @@ public class MockingjayProtocol: URLProtocol {
   }
   
   // MARK: Private Methods
+  
+  fileprivate func sendResponse(_ response: Response) {
+    switch response {
+    case .failure(let error):
+      client?.urlProtocol(self, didFailWithError: error)
+    case .success(var response, let download):
+      let headers = self.request.allHTTPHeaderFields
+      
+      switch(download) {
+      case .content(var data):
+        applyRangeFromHTTPHeaders(headers, toData: &data, andUpdateResponse: &response)
+        client?.urlProtocol(self, didLoad: data)
+        client?.urlProtocolDidFinishLoading(self)
+      case .streamContent(data: var data, inChunksOf: let bytes):
+        applyRangeFromHTTPHeaders(headers, toData: &data, andUpdateResponse: &response)
+        self.download(data, inChunksOfBytes: bytes)
+        return
+      case .noContent:
+        client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+        client?.urlProtocolDidFinishLoading(self)
+      }
+    }
+  }
   
   fileprivate func download(_ data:Data?, inChunksOfBytes bytes:Int) {
     guard let data = data else {
