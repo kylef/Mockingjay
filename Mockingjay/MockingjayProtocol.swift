@@ -92,10 +92,10 @@ public class MockingjayProtocol: URLProtocol {
       let response = stub.builder(request)
       if let delay = stub.delay {
         DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + delay) {
-          self.utilize(response)
+          self.sendResponse(response)
         }
       } else {
-        utilize(response)
+        sendResponse(response)
       }
     } else {
       let error = NSError(domain: NSExceptionName.internalInconsistencyException.rawValue, code: 0, userInfo: [ NSLocalizedDescriptionKey: "Handling request without a matching stub." ])
@@ -110,7 +110,7 @@ public class MockingjayProtocol: URLProtocol {
   
   // MARK: Private Methods
   
-  fileprivate func utilize(_ response: Response) {
+  fileprivate func sendResponse(_ response: Response) {
     switch response {
     case .failure(let error):
       client?.urlProtocol(self, didFailWithError: error)
