@@ -23,6 +23,8 @@
 		27703A631CE2560600194732 /* MockingjayURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 27703A621CE2560600194732 /* MockingjayURLSessionConfiguration.m */; };
 		444EA6091C5261DE000C3A9F /* MockingjayAsyncProtocolTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444EA6081C5261DE000C3A9F /* MockingjayAsyncProtocolTests.swift */; };
 		444EA60C1C52666D000C3A9F /* TestAudio.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 444EA60B1C52666D000C3A9F /* TestAudio.m4a */; };
+		9B2889531DF4DCF5005036B5 /* HttpBodyHack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2889521DF4DCF5005036B5 /* HttpBodyHack.swift */; };
+		9B2889591DF4E4DF005036B5 /* HttpBodyHackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B2889581DF4E4DF005036B5 /* HttpBodyHackTests.swift */; };
 		A1E3C5701AA4EA130069C998 /* XCTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2743679B1AA28D4D0030C97B /* XCTest.swift */; };
 /* End PBXBuildFile section */
 
@@ -88,6 +90,8 @@
 		27703A621CE2560600194732 /* MockingjayURLSessionConfiguration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockingjayURLSessionConfiguration.m; sourceTree = "<group>"; };
 		444EA6081C5261DE000C3A9F /* MockingjayAsyncProtocolTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockingjayAsyncProtocolTests.swift; sourceTree = "<group>"; };
 		444EA60B1C52666D000C3A9F /* TestAudio.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = TestAudio.m4a; sourceTree = "<group>"; };
+		9B2889521DF4DCF5005036B5 /* HttpBodyHack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpBodyHack.swift; sourceTree = "<group>"; };
+		9B2889581DF4E4DF005036B5 /* HttpBodyHackTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpBodyHackTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +157,7 @@
 				274367931AA27AAD0030C97B /* MockingjayProtocol.swift */,
 				2743679B1AA28D4D0030C97B /* XCTest.swift */,
 				274367C51AA35FD00030C97B /* NSURLSessionConfiguration.swift */,
+				9B2889521DF4DCF5005036B5 /* HttpBodyHack.swift */,
 				27703A621CE2560600194732 /* MockingjayURLSessionConfiguration.m */,
 				2746CDC21A702F7800719B66 /* Supporting Files */,
 			);
@@ -172,6 +177,7 @@
 			children = (
 				2746CDD11A702F7800719B66 /* MockingjayTests.swift */,
 				274367951AA27B170030C97B /* MockingjayProtocolTests.swift */,
+				9B2889581DF4E4DF005036B5 /* HttpBodyHackTests.swift */,
 				444EA6081C5261DE000C3A9F /* MockingjayAsyncProtocolTests.swift */,
 				274367991AA28B0D0030C97B /* MatcherTests.swift */,
 				274367B11AA29E620030C97B /* BuildersTests.swift */,
@@ -357,6 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9B2889531DF4DCF5005036B5 /* HttpBodyHack.swift in Sources */,
 				274367981AA28AFC0030C97B /* Matchers.swift in Sources */,
 				27703A631CE2560600194732 /* MockingjayURLSessionConfiguration.m in Sources */,
 				274367921AA27A7C0030C97B /* Mockingjay.swift in Sources */,
@@ -373,6 +380,7 @@
 			files = (
 				2743679A1AA28B0D0030C97B /* MatcherTests.swift in Sources */,
 				274367961AA27B170030C97B /* MockingjayProtocolTests.swift in Sources */,
+				9B2889591DF4E4DF005036B5 /* HttpBodyHackTests.swift in Sources */,
 				444EA6091C5261DE000C3A9F /* MockingjayAsyncProtocolTests.swift in Sources */,
 				274367B21AA29E620030C97B /* BuildersTests.swift in Sources */,
 				2705946B1C4FA7A6002A3AA9 /* MockingjayXCTestTests.swift in Sources */,
