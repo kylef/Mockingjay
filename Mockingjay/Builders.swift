@@ -46,3 +46,20 @@ public func jsonData(_ data: Data, status: Int = 200, headers: [String:String]? 
     return http(status, headers: headers, download: .content(data))(request)
   }
 }
+
+public func string(_ body: String, status: Int = 200, headers:[String:String]? = nil) -> (_ request: URLRequest) -> Response {
+    return { (request:URLRequest) in
+        return stringData(body, status: status, headers: headers)(request)
+    }
+}
+        
+public func stringData(_ data: String, status: Int = 200, headers: [String:String]? = nil) -> (_ request: URLRequest) -> Response {
+    return { (request:URLRequest) in
+        var headers = headers ?? [String:String]()
+        if headers["Content-Type"] == nil {
+            headers["Content-Type"] = "text/plain; charset=utf-8"
+        }
+        let data2: Data = data.data(using: .utf8)!
+        return http(status, headers: headers, download: .content(data2))(request)
+    }
+}
