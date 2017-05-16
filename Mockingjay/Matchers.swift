@@ -78,3 +78,13 @@ public func http(_ method: HTTPMethod, uri: String) -> (_ request: URLRequest) -
     return false
   }
 }
+
+public func http(method:HTTPMethod, uri:String, body:NSData)(request:NSURLRequest) -> Bool {
+  if let requestMethod = request.HTTPMethod {
+    if requestMethod == method.description && request.HTTPBody == body {
+      return Mockingjay.uri(uri)(request: request)
+    }
+  }
+  
+  return false
+}

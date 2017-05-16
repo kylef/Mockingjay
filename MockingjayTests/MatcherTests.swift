@@ -57,11 +57,30 @@ class HTTPMatcherTests : XCTestCase {
 
     XCTAssertTrue(http(.patch, uri: "https://api.palaverapp.com/")(request))
   }
+  
+  func testMethodBodyMatch() {
+    let request = NSMutableURLRequest(URL: NSURL(string: "https://api.palaverapp.com/")!)
+    let body = NSData(base64EncodedString: "ABCD", options: NSDataBase64DecodingOptions())
+    request.HTTPMethod = "PATCH"
+    request.HTTPBody = body
+    
+    XCTAssertTrue(http(.PATCH, uri: "https://api.palaverapp.com/", body:body!)(request:request))
+  }
 
   func testMethodMismatch() {
     var request = URLRequest(url: URL(string: "https://api.palaverapp.com/")!)
     request.httpMethod = "GET"
 
     XCTAssertFalse(http(.patch, uri: "https://api.palaverapp.com/")(request))
+  }
+  
+  func testMethodBodyMissMatch() {
+    let request = NSMutableURLRequest(URL: NSURL(string: "https://api.palaverapp.com/")!)
+    let body = NSData(base64EncodedString: "ABCD", options: NSDataBase64DecodingOptions())
+    let bodyMisMatch = NSData(base64EncodedString: "EFGH", options: NSDataBase64DecodingOptions())
+    request.HTTPMethod = "PATCH"
+    request.HTTPBody = body
+    
+    XCTAssertFalse(http(.PATCH, uri: "https://api.palaverapp.com/", body:bodyMisMatch!)(request:request))
   }
 }
