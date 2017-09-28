@@ -155,7 +155,7 @@ class MockingjayProtocolTests : XCTestCase {
     }
     
     let expectation = self.expectation(description: "testDelay")
-    let dataTask = urlSession.dataTask(with: request) { _ in
+    let dataTask = urlSession.dataTask(with: request) { _,_,_  in
       expectation.fulfill()
     }
     
