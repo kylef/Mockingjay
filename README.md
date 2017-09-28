@@ -32,7 +32,7 @@ The `uri` function takes a URL or path which can have a [URI Template](https://g
 
 ```swift
 let body = [ "description": "Kyle" ]
-stub(http(.PUT, "/kylef/Mockingjay"), json(body))
+stub(http(.put, "/kylef/Mockingjay"), json(body))
 ```
 
 #### Stubbing everything request to result in an error
