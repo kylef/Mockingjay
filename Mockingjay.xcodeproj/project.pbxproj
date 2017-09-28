@@ -156,7 +156,8 @@
 				27703A621CE2560600194732 /* MockingjayURLSessionConfiguration.m */,
 				2746CDC21A702F7800719B66 /* Supporting Files */,
 			);
-			path = Mockingjay;
+			name = Mockingjay;
+			path = Sources/Mockingjay;
 			sourceTree = "<group>";
 		};
 		2746CDC21A702F7800719B66 /* Supporting Files */ = {
@@ -179,7 +180,8 @@
 				444EA60D1C526673000C3A9F /* Resources */,
 				2746CDCF1A702F7800719B66 /* Supporting Files */,
 			);
-			path = MockingjayTests;
+			name = MockingjayTests;
+			path = Tests/MockingjayTests;
 			sourceTree = "<group>";
 		};
 		2746CDCF1A702F7800719B66 /* Supporting Files */ = {
@@ -498,7 +500,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Mockingjay/Info.plist;
+				INFOPLIST_FILE = Sources/Mockingjay/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -527,7 +529,7 @@
 					"$(PLATFORM_DIR)/Developer/Library/Frameworks",
 				);
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Mockingjay/Info.plist;
+				INFOPLIST_FILE = Sources/Mockingjay/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -549,7 +551,7 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = MockingjayTests/Info.plist;
+				INFOPLIST_FILE = Tests/MockingjayTests/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocode.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
@@ -562,7 +564,7 @@
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				INFOPLIST_FILE = MockingjayTests/Info.plist;
+				INFOPLIST_FILE = Tests/MockingjayTests/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocode.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
