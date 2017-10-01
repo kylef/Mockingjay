@@ -1,6 +1,6 @@
 language: objective-c
-osx_image: xcode8
+osx_image: xcode9
 script:
 - cd URITemplate && swift package generate-xcodeproj
-- xcodebuild -project Mockingjay.xcodeproj -scheme Mockingjay test -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
+- cd ../ && xcodebuild -project Mockingjay.xcodeproj -scheme Mockingjay test -sdk iphonesimulator11.0 -destination "OS=11.0,name=iPhone 7" ONLY_ACTIVE_ARCH=NO | xcpretty
 - pod lib lint --quick
