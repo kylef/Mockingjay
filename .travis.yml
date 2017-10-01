@@ -1,6 +1,6 @@
 language: objective-c
 osx_image: xcode9
 script:
-- cd URITemplate && swift package generate-xcodeproj
-- cd ../ && xcodebuild -project Mockingjay.xcodeproj -scheme Mockingjay test -sdk iphonesimulator11.0 -destination "OS=11.0,name=iPhone 7" ONLY_ACTIVE_ARCH=NO | xcpretty
-- pod lib lint --quick
+  - cd URITemplate && echo 'IPHONEOS_DEPLOYMENT_TARGET=8.0' > config.xconfig && swift package generate-xcodeproj --xcconfig-overrides ./config.xconfig
+  - cd ../ && xcodebuild -project Mockingjay.xcodeproj -scheme Mockingjay test -sdk iphonesimulator11.0 -destination "OS=11.0,name=iPhone 7" ONLY_ACTIVE_ARCH=NO | xcpretty
+  - pod lib lint --quick
