@@ -1,5 +1,12 @@
 # Mockingjay Changelog
 
+## 2.0.1
+
+### Enhancements
+
+- You can now specify a delay option to a stub to simulate network delays.
+- Adds support for building Mockingjay with Swift 4.
+
 ## 2.0.0 (2016-10-07)
 
 ### Breaking
