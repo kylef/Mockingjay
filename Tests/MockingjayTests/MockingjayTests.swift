@@ -43,13 +43,13 @@ class MockingjaySessionTests: XCTestCase {
     session.dataTask(with: URL(string: "https://httpbin.org/")!, completionHandler: { data, response, error in
       DispatchQueue.main.async {
         XCTAssertNotNil(error)
-        XCTAssertEqual((error as? NSError)?.domain, "Mockingjay Session Tests")
+        XCTAssertEqual((error as NSError?)?.domain, "Mockingjay Session Tests")
         expectation.fulfill()
       }
     }) .resume()
 
     waitForExpectations(timeout: 5) { error in
-      XCTAssertNil(error, "\(error)")
+      XCTAssertNil(error, String(describing: error))
     }
   }
 }
