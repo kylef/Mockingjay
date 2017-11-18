@@ -20,7 +20,7 @@ let swizzleDefaultSessionConfiguration: Void = {
 
 extension URLSessionConfiguration {
   /// Swizzles NSURLSessionConfiguration's default and ephermeral sessions to add Mockingjay
-  public class func mockingjaySwizzleDefaultSessionConfiguration() {
+  @objc public class func mockingjaySwizzleDefaultSessionConfiguration() {
     _ = swizzleDefaultSessionConfiguration
   }
 
