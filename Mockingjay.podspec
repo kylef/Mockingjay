@@ -8,6 +8,7 @@ Pod::Spec.new do |spec|
   spec.social_media_url = 'http://twitter.com/kylefuller'
   spec.source = { :git => 'https://github.com/kylef/Mockingjay.git', :tag => "#{spec.version}" }
   spec.ios.deployment_target = '8.0'
+  spec.tvos.deployment_target = '9.0'
   spec.osx.deployment_target = '10.10'
   spec.requires_arc = true
 
