@@ -32,7 +32,7 @@ The `uri` function takes a URL or path which can have a [URI Template](https://g
 
 ```swift
 let body = [ "description": "Kyle" ]
-stub(http(.put, "/kylef/Mockingjay"), json(body))
+stub(http(.put, uri: "/kylef/Mockingjay"), json(body))
 ```
 
 #### Stubbing everything request to result in an error
@@ -63,7 +63,7 @@ stub(matcher, builder)
 A matcher is simply a function that takes a request and returns a boolean value for if the stub matches the request.
 
 ```swift
-func matcher(request:NSURLRequest) -> Bool {
+func matcher(request:URLRequest) -> Bool {
   return true  // Let's match this request
 }
 
@@ -75,9 +75,9 @@ stub(matcher, failure(error))
 Builders are very similar to a matcher, it takes a request, and it returns either a success or failure response.
 
 ```swift
-func builder(request:NSURLRequest) -> Response {
-  let response = NSHTTPURLResponse(URL: request.URL, statusCode: 200, HTTPVersion: nil, headerFields: nil)!
-  return .Success(response, .NoContent)
+func builder(request: URLRequest) -> Response {
+  let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+  return .success(response, .noContent)
 }
 
 stub(matcher, builder)
@@ -107,9 +107,9 @@ During `setUp`, load the JSON file as `NSData` and use `jsonData`.
 ```swift
 override func setUp {
   super.setUp()
-  let path = NSBundle(forClass: self.dynamicType).pathForResource("fixture", ofType: "json")!
-  let data = NSData(contentsOfFile: path)!
-  stub(matcher, builder: jsonData(data))
+  let url = Bundle(for: type(of: self)).url(forResource: "fixture", withExtension: "json")!
+  let data = try! Data(contentsOf: url)
+  stub(matcher, jsonData(data))
 }
 ```
 
