@@ -15,6 +15,7 @@ public struct Stub : Equatable {
   let delay: TimeInterval?
   let builder:Builder
   let uuid:UUID
+  var requested:Bool = false
   
   init(matcher:@escaping Matcher, delay: TimeInterval?, builder:@escaping Builder) {
     self.matcher = matcher
@@ -97,6 +98,7 @@ public class MockingjayProtocol: URLProtocol {
       } else {
         sendResponse(response)
       }
+      stub.requested = true
     } else {
       let error = NSError(domain: NSExceptionName.internalInconsistencyException.rawValue, code: 0, userInfo: [ NSLocalizedDescriptionKey: "Handling request without a matching stub." ])
       client?.urlProtocol(self, didFailWithError: error)
