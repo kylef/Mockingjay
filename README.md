@@ -105,7 +105,7 @@ You can make use of the builtin generic matchers and builders. These can be used
 During `setUp`, load the JSON file as `NSData` and use `jsonData`.
 
 ```swift
-override func setUp {
+override func setUp() {
   super.setUp()
   let url = Bundle(for: type(of: self)).url(forResource: "fixture", withExtension: "json")!
   let data = try! Data(contentsOf: url)
