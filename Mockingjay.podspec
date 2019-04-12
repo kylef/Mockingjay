@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = 'Mockingjay'
-  spec.version = '2.0.1'
+  spec.version = '2.0.2'
   spec.summary = 'An elegant library for stubbing HTTP requests with ease in Swift.'
   spec.homepage = 'https://github.com/kylef/Mockingjay'
   spec.license = { :type => 'BSD', :file => 'LICENSE' }
@@ -27,4 +27,3 @@ Pod::Spec.new do |spec|
     xctest_spec.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
   end
 end
-

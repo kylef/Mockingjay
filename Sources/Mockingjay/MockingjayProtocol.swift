@@ -53,11 +53,9 @@ public class MockingjayProtocol: URLProtocol {
   
   /// Unregister the given stub
   open class func removeStub(_ stub:Stub) {
-    if let index = stubs.index(of: stub) {
-      stubs.remove(at: index)
-    }
+    stubs.removeAll(where: { $0 == stub })
   }
-  
+
   /// Remove all registered stubs
   open class func removeAllStubs() {
     stubs.removeAll(keepingCapacity: false)
