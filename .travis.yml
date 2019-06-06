@@ -3,6 +3,6 @@ matrix:
     - os: osx
       osx_image: xcode9.3
 script:
-  - cd URITemplate && swift package generate-xcodeproj
-  - xcodebuild -project Mockingjay.xcodeproj -scheme Mockingjay test -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
+  - cd URITemplate && swift package generate-xcodeproj && cd ..
+  - xcodebuild -project Mockingjay.xcodeproj -scheme Mockingjay test -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO
   - pod lib lint --quick
