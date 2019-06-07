@@ -113,10 +113,10 @@
 		2715FABE1D8C818C00A89DF7 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2715FACB1D8C818C00A89DF7 /* URITemplateTests.xctest */,
-				2715FAC91D8C818C00A89DF7 /* URITemplate.framework */,
 				2715FAC71D8C818C00A89DF7 /* PathKit.framework */,
 				2715FAC51D8C818C00A89DF7 /* Spectre.framework */,
+				2715FAC91D8C818C00A89DF7 /* URITemplate.framework */,
+				2715FACB1D8C818C00A89DF7 /* URITemplateTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -273,11 +273,11 @@
 				TargetAttributes = {
 					2746CDBE1A702F7800719B66 = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0910;
+						LastSwiftMigration = 1020;
 					};
 					2746CDC91A702F7800719B66 = {
 						CreatedOnToolsVersion = 6.1.1;
-						LastSwiftMigration = 0910;
+						LastSwiftMigration = 1020;
 					};
 				};
 			};
@@ -286,6 +286,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 2746CDB51A702F7800719B66;
@@ -442,7 +443,6 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 2.3;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -490,7 +490,6 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -520,8 +519,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
@@ -549,8 +547,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocode.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
@@ -568,8 +565,7 @@
 				INFOPLIST_FILE = Tests/MockingjayTests/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocode.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -582,8 +578,7 @@
 				INFOPLIST_FILE = Tests/MockingjayTests/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocode.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
