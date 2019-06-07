@@ -2,6 +2,8 @@
 
 An elegant library for stubbing HTTP requests in Swift, allowing you to stub any HTTP/HTTPS using `NSURLConnection` or `NSURLSession`. That includes any request made from libraries such as [Alamofire](https://github.com/Alamofire/Alamofire) and [AFNetworking](https://github.com/AFNetworking/AFNetworking).
 
+> ⚠️ **Note**: This project is no longer maintained by its author due to lack of free time. But don't hesitate to reach out to become a contributor or maintainer if you're interested. [For more information, or for asking to become a maintainer, see issue "Future of Project"](https://github.com/kylef/Mockingjay/issues/98).
+
 ## Installation
 
 [CocoaPods](http://cocoapods.org/) is the recommended installation method.
