@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name = 'Mockingjay'
-  spec.version = '2.0.1'
+  spec.version = '3.0.0-alpha.1'
   spec.summary = 'An elegant library for stubbing HTTP requests with ease in Swift.'
   spec.homepage = 'https://github.com/kylef/Mockingjay'
   spec.license = { :type => 'BSD', :file => 'LICENSE' }
@@ -11,9 +11,10 @@ Pod::Spec.new do |spec|
   spec.tvos.deployment_target = '9.0'
   spec.osx.deployment_target = '10.10'
   spec.requires_arc = true
+  spec.swift_versions = ['4.2', '5.0']
 
   spec.subspec 'Core' do |core_spec|
-    core_spec.dependency 'URITemplate', '~> 2.0'
+    core_spec.dependency 'URITemplate', '~> 3.0'
     core_spec.source_files = 'Sources/Mockingjay/Mockingjay.{h,swift}',
         'Sources/Mockingjay/MockingjayProtocol.swift',
         'Sources/Mockingjay/{Matchers,Builders}.swift',

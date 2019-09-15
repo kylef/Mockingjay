@@ -1,11 +1,8 @@
 matrix:
   include:
     - os: osx
-      osx_image: xcode8.3
-    - os: osx
-      osx_image: xcode9.1
-
+      osx_image: xcode10.2
 script:
-- cd URITemplate && swift package generate-xcodeproj
-- xcodebuild -project Mockingjay.xcodeproj -scheme Mockingjay test -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty
-- pod lib lint --quick
+  - cd URITemplate && swift package generate-xcodeproj && cd ..
+  - xcodebuild -project Mockingjay.xcodeproj -scheme Mockingjay test
+  - pod lib lint --quick

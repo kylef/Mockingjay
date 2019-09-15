@@ -1,5 +1,15 @@
 # Mockingjay Changelog
 
+## 3.0.0-alpha.1
+
+### Breaking
+
+- Support for Swift < 4.2 has been removed.
+
+### Enhancements
+
+- Adds support for Swift 5.0.
+
 ## 2.0.1
 
 ### Enhancements
