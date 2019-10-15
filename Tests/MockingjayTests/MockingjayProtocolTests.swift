@@ -8,7 +8,7 @@
 
 import Foundation
 import XCTest
-import Mockingjay
+@testable import Mockingjay
 
 
 class MockingjayProtocolTests : XCTestCase {
@@ -164,6 +164,8 @@ class MockingjayProtocolTests : XCTestCase {
     waitForExpectations(timeout: 2.0, handler: nil)
     
     XCTAssert(startDate.addingTimeInterval(0.95).compare(Date()) == .orderedAscending)
+
+    write()
   }
   
 }

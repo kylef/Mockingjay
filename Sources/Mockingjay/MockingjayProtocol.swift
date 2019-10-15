@@ -30,6 +30,7 @@ public func ==(lhs:Stub, rhs:Stub) -> Bool {
 
 var stubs = [Stub]()
 var registered: Bool = false
+var transactions: [(request: URLRequest, response: Response)] = []
 
 public class MockingjayProtocol: URLProtocol {
   // MARK: Stubs
@@ -90,6 +91,9 @@ public class MockingjayProtocol: URLProtocol {
   override open func startLoading() {
     if let stub = MockingjayProtocol.stubForRequest(request) {
       let response = stub.builder(request)
+
+      transactions.append((request, response))
+
       if let delay = stub.delay {
         DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + delay) {
           self.sendResponse(response)
@@ -203,4 +207,93 @@ public class MockingjayProtocol: URLProtocol {
       client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
   }
 
+}
+
+
+func transform(request: URLRequest) -> [String: Any] {
+  var attributes: [String: Any] = [:]
+
+  if let method = request.httpMethod {
+    attributes["method"] = [
+      "element": "string",
+      "content": method,
+    ]
+  }
+
+  if let href = request.url?.absoluteString {
+    attributes["href"] = [
+      "element": "string",
+      "content": href,
+    ]
+  }
+
+  return [
+    "element": "httpRequest",
+    "attributes": attributes,
+  ]
+}
+
+func transform(response: URLResponse, download: Download) -> [String: Any] {
+  var attributes: [String: Any] = [:]
+  var content: [Any] = []
+
+  if let response = response as? HTTPURLResponse {
+    attributes["statusCode"] = [
+      "element": "string",
+      "content": String(response.statusCode),
+    ]
+
+// FIXME    response.allHeaders
+  }
+
+  switch download {
+  case let .content(data):
+    content.append([
+      "element": "asset",
+      // FIXME, content type and messageBody
+      "content": String(data: data, encoding: .utf8)!,
+    ])
+  case .streamContent(data: let data, inChunksOf: let bytes):
+    // FIXME streamed data
+    break
+  case .noContent:
+    break
+  }
+
+  return [
+    "element": "httpResponse",
+    "attributes": attributes,
+    "content": content,
+  ]
+}
+
+func transform(response: Response) -> [String: Any]? {
+  switch response {
+  case let .success(response, download):
+    return transform(response: response, download: download)
+  case .failure:
+    return nil
+  }
+}
+
+func transform(transactions: [(request: URLRequest, response: Response)]) -> [String: Any] {
+  let content = transactions.map { (request, response) in
+    return [
+      "element": "httpTransaction",
+      "content": [
+        transform(request: request),
+        transform(response: response),
+      ],
+    ]
+  }
+
+  return [
+    "element": "array",
+    "content": content,
+  ]
+}
+
+func write() {
+  let data = try! JSONSerialization.data(withJSONObject: transform(transactions: transactions), options: .prettyPrinted)
+  print(String(data: data, encoding: .utf8)!)
 }
