@@ -12,7 +12,6 @@
 #elif __has_include("Mockingjay-Swift.h")
     #import "Mockingjay-Swift.h"
 #endif
-#import <
 
 
 @interface MockingjayURLConfiguration : NSObject
