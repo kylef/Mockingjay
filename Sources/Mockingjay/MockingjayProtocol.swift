@@ -40,7 +40,9 @@ public class MockingjayProtocol: URLProtocol {
     stubs.append(stub)
 
     if !registered {
-      URLProtocol.registerClass(MockingjayProtocol.self)
+        MockingjayURLSessionConfiguration.swizzleDefaultSessionConfiguration()
+        URLProtocol.registerClass(MockingjayProtocol.self)
+        registered = true
     }
 
     return stub
