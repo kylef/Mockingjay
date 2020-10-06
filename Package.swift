@@ -32,7 +32,8 @@ let package = Package(
                 "Mockingjay",
                 .product(name: "URITemplate", package: "URITemplate"),
             ],
-            exclude: ["Info.plist"]
+            exclude: ["Info.plist"],
+            resources: [.process("TestAudio.m4a")]
         ),
     ]
 )

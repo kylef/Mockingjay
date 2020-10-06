@@ -3,6 +3,5 @@ matrix:
     - os: osx
       osx_image: xcode10.2
 script:
-  - cd URITemplate && swift package generate-xcodeproj && cd ..
-  - xcodebuild -project Mockingjay.xcodeproj -scheme Mockingjay test
-  - pod lib lint --quick
+  - swift package update
+  - swift test

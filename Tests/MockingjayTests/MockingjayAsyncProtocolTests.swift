@@ -10,20 +10,6 @@ import Foundation
 import XCTest
 import Mockingjay
 
-extension Bundle {
-    var testBundle: Bundle? {
-        guard self.bundlePath.hasSuffix("xctest"),
-              let contents = try? FileManager.default.contentsOfDirectory(atPath: bundleURL.deletingLastPathComponent().path),
-              let testBundlePath: String = contents.first(where: { (path: String) -> Bool in
-                path.hasSuffix("bundle")
-                }),
-              let result = Bundle.init(url: bundleURL.deletingLastPathComponent().appendingPathComponent(testBundlePath))
-        else { return nil }
-
-        return result
-    }
-}
-
 class MockingjayAsyncProtocolTests: XCTestCase, URLSessionDataDelegate  {
   
   typealias DidReceiveDataHandler = (_ session: Foundation.URLSession, _ dataTask: URLSessionDataTask, _ data: Data) -> ()
@@ -75,7 +61,7 @@ class MockingjayAsyncProtocolTests: XCTestCase, URLSessionDataDelegate  {
   
   func testDownloadOfAudioFileInChunks() {
     let request = URLRequest(url: URL(string: "https://fuller.li/")!)
-    let path = Bundle(for: self.classForCoder).testBundle!.path(forResource: "TestAudio", ofType: "m4a")
+    let path = Bundle.module.path(forResource: "TestAudio", ofType: "m4a")
     let data = try! Data(contentsOf: URL(fileURLWithPath: path!))
     
     let stubResponse = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: "1.1", headerFields: ["Content-Length" : String(data.count)])!
@@ -105,7 +91,7 @@ class MockingjayAsyncProtocolTests: XCTestCase, URLSessionDataDelegate  {
     let length = 100000
     var request = URLRequest(url: URL(string: "https://fuller.li/")!)
     request.addValue("bytes=50000-149999", forHTTPHeaderField: "Range")
-    let path = Bundle(for: self.classForCoder).testBundle!.path(forResource: "TestAudio", ofType: "m4a")
+    let path = Bundle.module.path(forResource: "TestAudio", ofType: "m4a")
     let data = try! Data(contentsOf: URL(fileURLWithPath: path!))
     
     let stubResponse = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: "1.1", headerFields: ["Content-Length" : String(length)])!
