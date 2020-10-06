@@ -22,12 +22,17 @@ let package = Package(
             name: "Mockingjay",
             dependencies: [
                 .product(name: "URITemplate", package: "URITemplate"),
-            ]),
+            ],
+            exclude: ["Info.plist"]
+        ),
+            
         .testTarget(
             name: "MockingjayTests",
             dependencies: [
                 "Mockingjay",
                 .product(name: "URITemplate", package: "URITemplate"),
-            ]),
+            ],
+            exclude: ["Info.plist"]
+        ),
     ]
 )
