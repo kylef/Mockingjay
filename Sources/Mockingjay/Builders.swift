@@ -24,6 +24,9 @@ public func http(_ status:Int = 200, headers:[String:String]? = nil, download:Do
     return .failure(NSError(domain: NSExceptionName.internalInconsistencyException.rawValue, code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to construct response for stub."]))
   }
 }
+public func content(_ data: Data)  -> (_ request: URLRequest) -> Response {
+  return http(200, headers: nil, download: .content(data))
+}
 
 public func json(_ body: Any, status:Int = 200, headers:[String:String]? = nil) -> (_ request: URLRequest) -> Response {
   return { (request:URLRequest) in
