@@ -33,6 +33,19 @@ public func http(_ status:Int = 200, headers:[String:String]? = nil, download:Do
   }
 }
 
+public func text(_ body: String, using encoding: String.Encoding, status: Int = 200, headers: [String: String]? = nil) -> (_ request: URLRequest) -> Response {
+  var headers = headers ?? [String:String]()
+  if headers["Content-Type"] == nil && encoding == .utf8 {
+    headers["Content-Type"] = "text/plain; charset=utf-8"
+  }
+
+  if let data = body.data(using: encoding) {
+    return http(status, headers: headers, download: .content(data))
+  }
+
+  return failure()
+}
+
 public func json(_ body: Any, status:Int = 200, headers:[String:String]? = nil) -> (_ request: URLRequest) -> Response {
   return { (request:URLRequest) in
     do {
