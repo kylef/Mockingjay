@@ -67,3 +67,13 @@ public func jsonData(_ data: Data, status: Int = 200, headers: [String:String]? 
     return http(status, headers: headers, download: .content(data))(request)
   }
 }
+
+public func redirect(to url: URL, status: Int = 301, headers: [String:String]? = nil) -> (_ request: URLRequest) -> Response {
+  var headers = headers ?? [:]
+  headers["Location"] = url.absoluteString
+
+  let resoponse = HTTPURLResponse(url: url, statusCode: status, httpVersion: nil, headerFields: headers)!
+  return { request in
+    return .success(resoponse, .noContent)
+  }
+}
