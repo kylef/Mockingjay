@@ -145,4 +145,42 @@ class FailureBuilderTests : XCTestCase {
       XCTFail("Test Failure")
     }
   }
+
+  func testRedirect() {
+    let request = URLRequest(url: URL(string: "http://example.com")!)
+    let response = redirect(to: URL(string: "https://example.com")!)(request)
+
+    switch response {
+    case let .success(response, _):
+      guard let response = response as? HTTPURLResponse else {
+        XCTFail("Test Failure")
+        return
+      }
+
+
+      XCTAssertEqual(response.statusCode, 301)
+      XCTAssertEqual(response.allHeaderFields["Location"] as? String, "https://example.com")
+    default:
+      XCTFail("Test Failure")
+    }
+  }
+
+  func testRelativeRedirect() {
+    let request = URLRequest(url: URL(string: "https://example.com")!)
+    let response = redirect(to: URL(string: "/authorize")!)(request)
+
+    switch response {
+    case let .success(response, _):
+      guard let response = response as? HTTPURLResponse else {
+        XCTFail("Test Failure")
+        return
+      }
+
+
+      XCTAssertEqual(response.statusCode, 301)
+      XCTAssertEqual(response.allHeaderFields["Location"] as? String, "/authorize")
+    default:
+      XCTFail("Test Failure")
+    }
+  }
 }
