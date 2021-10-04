@@ -67,7 +67,32 @@ class FailureBuilderTests : XCTestCase {
       XCTFail("Test Failure: " + (error as NSError).debugDescription)
     }
   }
-  
+
+  func testText() {
+    let request = URLRequest(url: URL(string: "http://test.com/")!)
+    let response = text("Hello World", using: .utf8)(request)
+
+    switch response {
+    case let .success(response, download):
+      switch download {
+      case .content(let data):
+        if let response = response as? HTTPURLResponse {
+          XCTAssertEqual(response.statusCode, 200)
+          XCTAssertEqual(response.mimeType, "text/plain")
+          XCTAssertEqual(response.textEncodingName, "utf-8")
+          let body = NSString(data:data, encoding: String.Encoding.utf8.rawValue)
+          XCTAssertEqual(body, "Hello World")
+        } else {
+          XCTFail("Test Failure")
+        }
+      default:
+        XCTFail("Test Failure")
+      }
+    default:
+      XCTFail("Test Failure")
+    }
+  }
+
   func testJSON() {
     let request = URLRequest(url: URL(string: "http://test.com/")!)
     let response = json(["A"])(request)
