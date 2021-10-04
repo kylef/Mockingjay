@@ -109,6 +109,23 @@ public class MockingjayProtocol: URLProtocol {
   }
   
   // MARK: Private Methods
+
+  func isRedirect(request: URLRequest, response: URLResponse) -> URLRequest? {
+    guard
+      let response = response as? HTTPURLResponse,
+      response.statusCode == 301 || response.statusCode == 302 || response.statusCode == 303 || response.statusCode == 307,
+      let location = response.allHeaderFields["Location"] as? String,
+      let locationURL = URL(string: location, relativeTo: response.url)
+    else { return nil }
+
+    if response.statusCode == 307 {
+      var redirectRequest = request
+      redirectRequest.url = locationURL
+      return redirectRequest
+    }
+
+    return URLRequest(url: locationURL)
+  }
   
   fileprivate func sendResponse(_ response: Response) {
     switch response {
@@ -116,6 +133,11 @@ public class MockingjayProtocol: URLProtocol {
       client?.urlProtocol(self, didFailWithError: error)
     case .success(var response, let download):
       let headers = self.request.allHTTPHeaderFields
+
+      if let redirectRequest = isRedirect(request: self.request, response: response) {
+        client?.urlProtocol(self, wasRedirectedTo: redirectRequest, redirectResponse: response)
+        return
+      }
       
       switch(download) {
       case .content(var data):

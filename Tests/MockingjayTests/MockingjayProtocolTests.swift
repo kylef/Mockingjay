@@ -165,5 +165,60 @@ class MockingjayProtocolTests : XCTestCase {
     
     XCTAssert(startDate.addingTimeInterval(0.95).compare(Date()) == .orderedAscending)
   }
-  
+
+  func testRedirect() {
+    let request = URLRequest(url: URL(string: "http://example.com")!)
+
+    MockingjayProtocol.addStub(
+      matcher: { $0.url?.absoluteString == "https://example.com" },
+      builder: http(204, download: .noContent)
+    )
+
+    MockingjayProtocol.addStub(
+      matcher: { $0.url?.absoluteString == "http://example.com" },
+      builder: http(301, headers: ["Location": "https://example.com"], download: .noContent)
+    )
+
+    let expectation = self.expectation(description: #function)
+
+    urlSession = URLSession(configuration: URLSessionConfiguration.default)
+    let dataTask = urlSession.dataTask(with: request) { _, response, _  in
+      XCTAssertEqual(response?.url?.absoluteString, "https://example.com")
+      expectation.fulfill()
+    }
+    dataTask.resume()
+
+    waitForExpectations(timeout: 2.0, handler: nil)
+  }
+
+  func testRedirect307() {
+    var request = URLRequest(url: URL(string: "http://example.com")!)
+    request.httpMethod = "PUT"
+    request.setValue("text/plain", forHTTPHeaderField: "Content-Type")
+
+    MockingjayProtocol.addStub(
+      matcher: { $0.url?.absoluteString == "https://example.com" },
+      builder: http(204, download: .noContent)
+    )
+
+    MockingjayProtocol.addStub(
+      matcher: { $0.url?.absoluteString == "http://example.com" },
+      builder: { request in
+        XCTAssertEqual(request.httpMethod, "PUT")
+        XCTAssertEqual(request.allHTTPHeaderFields?["Content-Type"], "text/plain")
+        return http(307, headers: ["Location": "https://example.com"], download: .noContent)(request)
+      }
+    )
+
+    let expectation = self.expectation(description: #function)
+
+    urlSession = URLSession(configuration: URLSessionConfiguration.default)
+    let dataTask = urlSession.dataTask(with: request) { _, response, _  in
+      XCTAssertEqual(response?.url?.absoluteString, "https://example.com")
+      expectation.fulfill()
+    }
+    dataTask.resume()
+
+    waitForExpectations(timeout: 2.0, handler: nil)
+  }
 }

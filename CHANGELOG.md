@@ -1,5 +1,11 @@
 # Mockingjay Changelog
 
+## TBD
+
+### Enhancements
+
+- Support for redirect responses (3xx).
+
 ## 3.0.0-alpha.1
 
 ### Breaking
