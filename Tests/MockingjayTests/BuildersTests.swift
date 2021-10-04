@@ -20,6 +20,19 @@ class FailureBuilderTests : XCTestCase {
     
     XCTAssertEqual(response, Response.failure(error))
   }
+
+  func testUnspecifiedFailure() {
+    let request = URLRequest(url: URL(string: "http://test.com/")!)
+
+    let response = failure()(request)
+
+    switch response {
+    case .success(_, _):
+      XCTFail("Unexpected success")
+    case .failure(_):
+      break
+    }
+  }
   
   func testHTTP() {
     let request = URLRequest(url: URL(string: "http://test.com/")!)
@@ -51,7 +64,7 @@ class FailureBuilderTests : XCTestCase {
         XCTFail("Test Failure")
       }
     case let .failure(error):
-      XCTFail("Test Failure: " + error.debugDescription)
+      XCTFail("Test Failure: " + (error as NSError).debugDescription)
     }
   }
   
