@@ -10,9 +10,17 @@ import Foundation
 
 // Collection of generic builders
 
+internal struct MockingjayFailure: Error {}
+
 /// Generic builder for returning a failure
-public func failure(_ error: NSError) -> (_ request: URLRequest) -> Response {
-  return { _ in return .failure(error) }
+public func failure(_ error: Error? = nil) -> (_ request: URLRequest) -> Response {
+  return { _ in
+    if let error = error {
+      return .failure(error)
+    }
+
+    return .failure(MockingjayFailure())
+  }
 }
 
 public func http(_ status:Int = 200, headers:[String:String]? = nil, download:Download=nil) -> (_ request: URLRequest) -> Response {

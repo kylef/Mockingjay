@@ -38,13 +38,13 @@ public func ==(lhs:Download, rhs:Download) -> Bool {
 
 public enum Response : Equatable {
   case success(URLResponse, Download)
-  case failure(NSError)
+  case failure(Error)
 }
 
 public func ==(lhs:Response, rhs:Response) -> Bool {
   switch (lhs, rhs) {
   case let (.failure(lhsError), .failure(rhsError)):
-    return lhsError == rhsError
+    return (lhsError as NSError) == (rhsError as NSError)
   case let (.success(lhsResponse, lhsDownload), .success(rhsResponse, rhsDownload)):
     return lhsResponse == rhsResponse && lhsDownload == rhsDownload
   default:
