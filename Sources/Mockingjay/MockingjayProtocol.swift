@@ -28,10 +28,35 @@ public func ==(lhs:Stub, rhs:Stub) -> Bool {
   return lhs.uuid == rhs.uuid
 }
 
-var stubs = [Stub]()
-var registered: Bool = false
+class MockingjayStorage {
+    static let shared = MockingjayStorage()
+    
+    var stubs: [Stub] {
+        get { accessQueue.sync { _stubs } }
+        set { accessQueue.sync { _stubs = newValue } }
+    }
+    
+    var registered: Bool {
+        get { accessQueue.sync { _registered } }
+        set { accessQueue.sync { _registered = newValue } }
+    }
+    
+    private var _stubs = [Stub]()
+    private var _registered: Bool = false
+    private var accessQueue: DispatchQueue { DispatchQueue(label: "MockingjayStorageQueue", qos: .default) }
+}
 
 public class MockingjayProtocol: URLProtocol {
+  private class var storage: MockingjayStorage { .shared }
+  private class var stubs: [Stub] {
+      get { storage.stubs }
+      set { storage.stubs = newValue }
+  }
+  private class var registered: Bool {
+      get { storage.registered }
+      set { storage.registered = newValue }
+  }
+  
   // MARK: Stubs
   fileprivate var enableDownloading = true
   fileprivate let operationQueue = OperationQueue()
